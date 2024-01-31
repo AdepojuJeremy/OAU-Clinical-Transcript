@@ -1,11 +1,11 @@
 "use client";
 
-// import useScreenSize from "./components/useScreenSize";
 import Header from '@/components/Header'
 // import { Provider } from "react-redux";
 // import store from "@/store/store";
+import Form from "@/components/Form";
+
 export default function Home() {
-  // const { isDesktop, isMobile, isTablet } = useScreenSize();
   return (
     // <Provider store={store}>
     //   <div className="md:flex md:justify-center">
@@ -13,7 +13,7 @@ export default function Home() {
 
     <div className='Home'>
       <Header />
+      <Form />
     </div>
-    // </Provider>
   );
 }
