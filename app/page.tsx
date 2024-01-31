@@ -1,7 +1,7 @@
 "use client";
 
 // import useScreenSize from "./components/useScreenSize";
-
+import Header from '@/components/Header'
 // import { Provider } from "react-redux";
 // import store from "@/store/store";
 export default function Home() {
@@ -11,8 +11,8 @@ export default function Home() {
     //   <div className="md:flex md:justify-center">
     //     {isMobile && <NavMobile />}
 
-    <div>
-      <h1 className="font-crimson">app is running</h1>
+    <div className='Home'>
+      <Header />
     </div>
     // </Provider>
   );

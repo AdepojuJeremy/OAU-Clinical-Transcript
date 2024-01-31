@@ -54,7 +54,9 @@ const config = {
         },
 
         // Custom Colors
-        backgroundColor: 'F5F7F8', 
+        backgroundColor: '#F5F7F8', 
+        primaryBlue: '#080E53',
+        oauOrange: '#FFC238',
       },
       borderRadius: {
         lg: "var(--radius)",
