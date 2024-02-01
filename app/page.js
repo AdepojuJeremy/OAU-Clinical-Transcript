@@ -1,7 +1,12 @@
-import HeaderOne from "@/components/HeaderOne";
+import HomeHeader from "@/components/HomeHeader";
+import SearchBar from "@/components/SearchBar";
+
 export default function Home() {
   return (
     <div className="Home">
-      <HeaderOne />
+      <HomeHeader />
+      <main className="main h-screen w-screen flex justify-center items-center">
+        <SearchBar />
+      </main>
     </div>  );
 }
