@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Header() {
+function HeaderOne() {
   return (
     <nav className='absolute inset-x-0 flex justify-center items-center py-10 text-[30px]'>
       <div className='w-[90%] flex justify-between items-center'>
@@ -11,9 +11,8 @@ function Header() {
             <li>Contact</li>
         </ul>
       </div>
-
     </nav>
   )
 }
 
-export default Header
+export default HeaderOne
