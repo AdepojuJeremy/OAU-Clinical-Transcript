@@ -1,11 +1,13 @@
 /** @type {import('tailwindcss').Config} */
+// import { crimson } from "./app/layout.js";
+
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{js,jsx}',
-    './components/**/*.{js,jsx}',
-    './app/**/*.{js,jsx}',
-    './src/**/*.{js,jsx}',
+    "./pages/**/*.{js,jsx}",
+    "./components/**/*.{js,jsx}",
+    "./app/**/*.{js,jsx}",
+    "./src/**/*.{js,jsx}",
   ],
   prefix: "",
   theme: {
@@ -17,6 +19,9 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        // crimson: crimson.variable,
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -51,12 +56,12 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        
+
         // Custom Colors
-        backgroundColor: '#F5F7F8', 
-        primaryBlue: '#080E53',
-        primaryGray: '#8487A9',
-        oauOrange: '#FFC238',
+        backgroundColor: "#F5F7F8",
+        primaryBlue: "#080E53",
+        primaryGray: "#8487A9",
+        oauOrange: "#FFC238",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -80,4 +85,4 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+};
