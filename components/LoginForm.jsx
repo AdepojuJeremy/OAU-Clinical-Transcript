@@ -21,7 +21,7 @@ export default function CardWithForm() {
           Hi, Welcome back
         </CardTitle>
       </CardHeader>
-      <CardContent className="max-w-[90%] mx-auto">
+      <CardContent className=" max-w-[95%] md:max-w-[90%] mx-auto">
         <form>
           <div className="grid w-full items-center gap-8">
             <div className="flex flex-col space-y-2.5">

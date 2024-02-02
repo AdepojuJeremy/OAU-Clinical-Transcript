@@ -67,17 +67,17 @@ function SearchBar() {
             <div className="filter-tags flex-1 flex justify-between max-w-[65%]">
               
               <div className="graduation filter-tag">Graduation</div>
-              <DropdownMenu>
+              {/* <DropdownMenu>
                 <DropdownMenuTrigger>Open</DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  {/* <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>Profile</DropdownMenuItem>
                   <DropdownMenuItem>Billing</DropdownMenuItem>
                   <DropdownMenuItem>Team</DropdownMenuItem>
-                  <DropdownMenuItem>Subscription</DropdownMenuItem> */}
+                  <DropdownMenuItem>Subscription</DropdownMenuItem>
                 </DropdownMenuContent>
-              </DropdownMenu>
+              </DropdownMenu> */}
               <div className="admission filter-tag">Admission Year</div>
               <div className="criterion filter-tag">Criterion X</div>
             </div>
