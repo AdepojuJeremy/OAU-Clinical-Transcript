@@ -5,8 +5,9 @@ export default function Home() {
   return (
     <div className="Home">
       <HomeHeader />
-      <main className="main h-screen w-screen flex justify-center items-center">
+      <main className="main min-h-screen w-screen flex justify-center items-center">
         <SearchBar />
       </main>
-    </div>  );
+    </div>
+  );
 }
