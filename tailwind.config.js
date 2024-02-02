@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-// import { crimson } from "./app/layout.js";
+// import { crimson } from './app/layout'
+
 
 module.exports = {
   darkMode: ["class"],
@@ -20,7 +21,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        // crimson: crimson.variable,
+        'crimson': 'var(--font-crimson)'
       },
       colors: {
         border: "hsl(var(--border))",

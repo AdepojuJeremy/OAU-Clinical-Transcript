@@ -9,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -16,7 +17,7 @@ export default function CardWithForm() {
   return (
     <Card className="max-w-[800px] min-w-[350px]">
       <CardHeader>
-        <CardTitle className="text-crimson">Hi, Welcome back</CardTitle>
+        <CardTitle className="font-crimson">Hi, Welcome back</CardTitle>
       </CardHeader>
       <CardContent>
         <form>
@@ -31,7 +32,7 @@ export default function CardWithForm() {
               <Input id="password" placeholder="Enter your password" />
             </div>
 
-            <div classname="flex justify-between">
+            <div className="flex justify-between">
               <div className="flex items-center space-x-2">
                 <Checkbox id="terms" />
                 <label
