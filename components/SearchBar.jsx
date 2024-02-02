@@ -54,7 +54,7 @@ function SearchBar() {
       >
         <CommandInput
           onClick={() => setSearchOpen(true)}
-          className="italic text-primaryBlue placeholder:text-primaryBlue border-none"
+          className="placeholder:italic text-primaryBlue placeholder:text-primaryBlue border-none"
           placeholder="Search by Name or Matric No."
         />
         <img src="./mi_filter.svg" alt="mi_filter" className="h-8 w-8 " />
@@ -70,12 +70,12 @@ function SearchBar() {
               <DropdownMenu>
                 <DropdownMenuTrigger>Open</DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  {/* <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>Profile</DropdownMenuItem>
                   <DropdownMenuItem>Billing</DropdownMenuItem>
                   <DropdownMenuItem>Team</DropdownMenuItem>
-                  <DropdownMenuItem>Subscription</DropdownMenuItem>
+                  <DropdownMenuItem>Subscription</DropdownMenuItem> */}
                 </DropdownMenuContent>
               </DropdownMenu>
               <div className="admission filter-tag">Admission Year</div>
