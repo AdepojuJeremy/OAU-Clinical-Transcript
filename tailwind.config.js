@@ -58,9 +58,11 @@ module.exports = {
 
         // Custom Colors
         backgroundColor: "#F5F7F8",
+
         primaryBlue: "#080E53",
         primaryGray: "#8487A9",
         oauOrange: "#FFC238",
+        placeholder: "#C1C2D4",
       },
       borderRadius: {
         lg: "var(--radius)",

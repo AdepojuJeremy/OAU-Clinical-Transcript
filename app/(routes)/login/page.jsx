@@ -9,11 +9,17 @@ function page() {
       <HeaderOne />
       <main
         id="page-content"
-        className="pt-[12.5rem] w-full flex items-center justify-center flex-1"
+        className="pt-[10rem] w-full flex items-center justify-center flex-col flex-1 pb-8"
       >
-        <LoginForm />
-        <p>
-          Already have an account <Link href="signup">Sign Up</Link>
+        <div className="w-[80%] min-w-[300px] max-w-[800px] ">
+          <LoginForm />
+        </div>
+
+        <p className="font-crimson font-bold text-lg pt-8 ">
+          Don't have an account?{" "}
+          <Link href="signup" className="text-oauOrange pl-4">
+            Sign Up
+          </Link>
         </p>
       </main>
     </div>

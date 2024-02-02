@@ -1,7 +1,7 @@
 import Image from "next/image";
+import SignupForm from "@/components/SignupForm";
 
 export default function SignUp() {
-  
   return (
     <main className="min-h-screen w-full flex">
       <div className="flex-grow"></div>
