@@ -33,7 +33,7 @@ function SearchBar() {
   const [filteredStudents, setFilteredStudents] = useState(students);
 
   const filteredSearch = (e) => {
-    const { value } = event.target;
+    const { value } = e.target;
     setSearchTerm(value);
 
     // Filter the students based on the matric number or name
@@ -72,7 +72,7 @@ function SearchBar() {
       ref={search}
       className={`${
         !searchOpen ? "" : "mt-[10%]"
-      } w-[40%] rounded-xl justify-between items-center px-4`}
+      } w-[40%] rounded-xl justify-between items-center px-4 `}
     >
       <div
         className={`flex flex-row w-full justify-between items-center gap-6 ${
@@ -81,8 +81,10 @@ function SearchBar() {
       >
         <CommandInput
           onClick={() => setSearchOpen(true)}
+          onChange={(e) => filteredSearch(e)}
           className="placeholder:italic text-primaryBlue placeholder:text-primaryBlue border-none"
           placeholder="Search by Name or Matric No."
+
         />
         <img
           src="./mi_filter.svg"
@@ -100,7 +102,7 @@ function SearchBar() {
               <div className="filter-tags flex-1 flex justify-between max-w-[65%]">
                 <div className="graduation relative">
                   <button
-                    className={`text-white px-2 py-1 rounded-lg text-[16px] ${
+                    className={`text-white px-2 py-1 rounded-lg  ${
                       graduationDropOpen ? "bg-primaryBlue" : "bg-primaryGray"
                     }`}
                     onClick={() => setGraduationDropOpen(!graduationDropOpen)}
@@ -126,7 +128,7 @@ function SearchBar() {
                 </div>
                 <div className="admission relative">
                   <button
-                    className={`text-white px-2 py-1 rounded-lg text-[16px] ${
+                    className={`text-white px-2 py-1 rounded-lg ${
                       admissionDropOpen ? "bg-primaryBlue" : "bg-primaryGray"
                     }`}
                     onClick={() => setAdmissionDropOpen(!admissionDropOpen)}
@@ -161,10 +163,17 @@ function SearchBar() {
           )}
           <CommandList ref={suggestions} className="w-full">
             <CommandGroup>
-              {filteredStudents.map((item, i) => (
-                <CommandItem key={i} className="flex justify-between">
-                  <div className="flex gap-4">
-                    <span></span> <span>Aboma Ciroma A.</span>
+              {filteredStudents.map((item, i, arr) => {
+                const {name, matricNo} = item
+                return(
+                <CommandItem
+                  key={i}
+                  className={`flex justify-between bg-none font-medium py-2 text-base ${
+                    i != arr.length - 1 ? "border-b" : ""
+                  }`}
+                >
+                  <div className="flex gap-4 text-primaryGray">
+                    <span>{matricNo}</span> <span>{name}</span>
                   </div>{" "}
                   <div>
                     <Link className="text-oauOrange" href={""}>
@@ -172,7 +181,7 @@ function SearchBar() {
                     </Link>
                   </div>
                 </CommandItem>
-              ))}
+              )})}
             </CommandGroup>
           </CommandList>
         </>

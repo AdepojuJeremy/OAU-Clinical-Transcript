@@ -68,11 +68,12 @@
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border ;
   }
   body {
     @apply bg-backgroundColor text-foreground text-base;
   }
+
 }
 
 .filter-tag {
@@ -80,8 +81,8 @@
 }
 
 .admission-dropdown-list > li {
-  @apply py-1;
-  border-bottom: 1px solid black;
+  @apply py-1 border-b-[1px] border-b-primaryGray;
+ 
 }
 .admission-dropdown-list > li:last-child {
   border-bottom: none;
