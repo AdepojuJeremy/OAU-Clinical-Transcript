@@ -1,0 +1,330 @@
+[
+    {
+        "_id": "65b04bf770315e1fdc742ca4",
+        "name": "John Doe",
+        "matricNo": "M123456",
+        "details": [
+            {
+                "_id": "65b04bf770315e1fdc742ca5",
+                "twoHundredLevel": [
+                    {
+                        "_id": "65b04bf770315e1fdc742ca7",
+                        "courseTitle": "Anatomy",
+                        "courseScore": 90,
+                        "courseGrade": "Distinction"
+                    },
+                    {
+                        "_id": "65b04bf770315e1fdc742ca6",
+                        "courseTitle": "Anatomy",
+                        "courseScore": 90,
+                        "courseGrade": "Distinction"
+                    }
+                ],
+                "threeHundredLevel": [
+                    {
+                        "_id": "65b04bf770315e1fdc742ca9",
+                        "courseTitle": "Biochemistry",
+                        "courseScore": 85,
+                        "courseGrade": "High Pass"
+                    },
+                    {
+                        "_id": "65b04bf770315e1fdc742ca8",
+                        "courseTitle": "Anatomy",
+                        "courseScore": 90,
+                        "courseGrade": "Distinction"
+                    }
+                ],
+                "fourHundredLevel": [
+                    {
+                        "_id": "65b04bf770315e1fdc742cab",
+                        "courseTitle": "Biochemistry",
+                        "courseScore": 85,
+                        "courseGrade": "High Pass"
+                    },
+                    {
+                        "_id": "65b04bf770315e1fdc742caa",
+                        "courseTitle": "Anatomy",
+                        "courseScore": 90,
+                        "courseGrade": "Distinction"
+                    }
+                ],
+                "fiveHundredLevel": [
+                    {
+                        "_id": "65b04bf770315e1fdc742cad",
+                        "courseTitle": "Biochemistry",
+                        "courseScore": 85,
+                        "courseGrade": "High Pass"
+                    },
+                    {
+                        "_id": "65b04bf770315e1fdc742cac",
+                        "courseTitle": "Anatomy",
+                        "courseScore": 90,
+                        "courseGrade": "Distinction"
+                    }
+                ],
+                "sixHundredLevel": [
+                    {
+                        "_id": "65b04bf770315e1fdc742caf",
+                        "courseTitle": "Anatomy",
+                        "courseScore": 90,
+                        "courseGrade": "Distinction"
+                    },
+                    {
+                        "_id": "65b04bf770315e1fdc742cae",
+                        "courseTitle": "Biochemistry",
+                        "courseScore": 85,
+                        "courseGrade": "High Pass"
+                    }
+                ],
+                "studentElectives": []
+            }
+        ],
+        "__v": 0
+    },
+    {
+        "_id": "65b04bf770315e1fdc742ca4",
+        "name": "John Doe",
+        "matricNo": "M123456",
+        "details": [
+            {
+                "_id": "65b04bf770315e1fdc742ca5",
+                "twoHundredLevel": [
+                    {
+                        "_id": "65b04bf770315e1fdc742ca7",
+                        "courseTitle": "Anatomy",
+                        "courseScore": 90,
+                        "courseGrade": "Distinction"
+                    },
+                    {
+                        "_id": "65b04bf770315e1fdc742ca6",
+                        "courseTitle": "Anatomy",
+                        "courseScore": 90,
+                        "courseGrade": "Distinction"
+                    }
+                ],
+                "threeHundredLevel": [
+                    {
+                        "_id": "65b04bf770315e1fdc742ca9",
+                        "courseTitle": "Biochemistry",
+                        "courseScore": 85,
+                        "courseGrade": "High Pass"
+                    },
+                    {
+                        "_id": "65b04bf770315e1fdc742ca8",
+                        "courseTitle": "Anatomy",
+                        "courseScore": 90,
+                        "courseGrade": "Distinction"
+                    }
+                ],
+                "fourHundredLevel": [
+                    {
+                        "_id": "65b04bf770315e1fdc742cab",
+                        "courseTitle": "Biochemistry",
+                        "courseScore": 85,
+                        "courseGrade": "High Pass"
+                    },
+                    {
+                        "_id": "65b04bf770315e1fdc742caa",
+                        "courseTitle": "Anatomy",
+                        "courseScore": 90,
+                        "courseGrade": "Distinction"
+                    }
+                ],
+                "fiveHundredLevel": [
+                    {
+                        "_id": "65b04bf770315e1fdc742cad",
+                        "courseTitle": "Biochemistry",
+                        "courseScore": 85,
+                        "courseGrade": "High Pass"
+                    },
+                    {
+                        "_id": "65b04bf770315e1fdc742cac",
+                        "courseTitle": "Anatomy",
+                        "courseScore": 90,
+                        "courseGrade": "Distinction"
+                    }
+                ],
+                "sixHundredLevel": [
+                    {
+                        "_id": "65b04bf770315e1fdc742caf",
+                        "courseTitle": "Anatomy",
+                        "courseScore": 90,
+                        "courseGrade": "Distinction"
+                    },
+                    {
+                        "_id": "65b04bf770315e1fdc742cae",
+                        "courseTitle": "Biochemistry",
+                        "courseScore": 85,
+                        "courseGrade": "High Pass"
+                    }
+                ],
+                "studentElectives": []
+            }
+        ],
+        "__v": 0
+    },
+    {
+        "_id": "65b04bf770315e1fdc742ca4",
+        "name": "John Doe",
+        "matricNo": "M123456",
+        "details": [
+            {
+                "_id": "65b04bf770315e1fdc742ca5",
+                "twoHundredLevel": [
+                    {
+                        "_id": "65b04bf770315e1fdc742ca7",
+                        "courseTitle": "Anatomy",
+                        "courseScore": 90,
+                        "courseGrade": "Distinction"
+                    },
+                    {
+                        "_id": "65b04bf770315e1fdc742ca6",
+                        "courseTitle": "Anatomy",
+                        "courseScore": 90,
+                        "courseGrade": "Distinction"
+                    }
+                ],
+                "threeHundredLevel": [
+                    {
+                        "_id": "65b04bf770315e1fdc742ca9",
+                        "courseTitle": "Biochemistry",
+                        "courseScore": 85,
+                        "courseGrade": "High Pass"
+                    },
+                    {
+                        "_id": "65b04bf770315e1fdc742ca8",
+                        "courseTitle": "Anatomy",
+                        "courseScore": 90,
+                        "courseGrade": "Distinction"
+                    }
+                ],
+                "fourHundredLevel": [
+                    {
+                        "_id": "65b04bf770315e1fdc742cab",
+                        "courseTitle": "Biochemistry",
+                        "courseScore": 85,
+                        "courseGrade": "High Pass"
+                    },
+                    {
+                        "_id": "65b04bf770315e1fdc742caa",
+                        "courseTitle": "Anatomy",
+                        "courseScore": 90,
+                        "courseGrade": "Distinction"
+                    }
+                ],
+                "fiveHundredLevel": [
+                    {
+                        "_id": "65b04bf770315e1fdc742cad",
+                        "courseTitle": "Biochemistry",
+                        "courseScore": 85,
+                        "courseGrade": "High Pass"
+                    },
+                    {
+                        "_id": "65b04bf770315e1fdc742cac",
+                        "courseTitle": "Anatomy",
+                        "courseScore": 90,
+                        "courseGrade": "Distinction"
+                    }
+                ],
+                "sixHundredLevel": [
+                    {
+                        "_id": "65b04bf770315e1fdc742caf",
+                        "courseTitle": "Anatomy",
+                        "courseScore": 90,
+                        "courseGrade": "Distinction"
+                    },
+                    {
+                        "_id": "65b04bf770315e1fdc742cae",
+                        "courseTitle": "Biochemistry",
+                        "courseScore": 85,
+                        "courseGrade": "High Pass"
+                    }
+                ],
+                "studentElectives": []
+            }
+        ],
+        "__v": 0
+    },
+    {
+        "_id": "65b04bf770315e1fdc742ca4",
+        "name": "John Doe",
+        "matricNo": "M123456",
+        "details": [
+            {
+                "_id": "65b04bf770315e1fdc742ca5",
+                "twoHundredLevel": [
+                    {
+                        "_id": "65b04bf770315e1fdc742ca7",
+                        "courseTitle": "Anatomy",
+                        "courseScore": 90,
+                        "courseGrade": "Distinction"
+                    },
+                    {
+                        "_id": "65b04bf770315e1fdc742ca6",
+                        "courseTitle": "Anatomy",
+                        "courseScore": 90,
+                        "courseGrade": "Distinction"
+                    }
+                ],
+                "threeHundredLevel": [
+                    {
+                        "_id": "65b04bf770315e1fdc742ca9",
+                        "courseTitle": "Biochemistry",
+                        "courseScore": 85,
+                        "courseGrade": "High Pass"
+                    },
+                    {
+                        "_id": "65b04bf770315e1fdc742ca8",
+                        "courseTitle": "Anatomy",
+                        "courseScore": 90,
+                        "courseGrade": "Distinction"
+                    }
+                ],
+                "fourHundredLevel": [
+                    {
+                        "_id": "65b04bf770315e1fdc742cab",
+                        "courseTitle": "Biochemistry",
+                        "courseScore": 85,
+                        "courseGrade": "High Pass"
+                    },
+                    {
+                        "_id": "65b04bf770315e1fdc742caa",
+                        "courseTitle": "Anatomy",
+                        "courseScore": 90,
+                        "courseGrade": "Distinction"
+                    }
+                ],
+                "fiveHundredLevel": [
+                    {
+                        "_id": "65b04bf770315e1fdc742cad",
+                        "courseTitle": "Biochemistry",
+                        "courseScore": 85,
+                        "courseGrade": "High Pass"
+                    },
+                    {
+                        "_id": "65b04bf770315e1fdc742cac",
+                        "courseTitle": "Anatomy",
+                        "courseScore": 90,
+                        "courseGrade": "Distinction"
+                    }
+                ],
+                "sixHundredLevel": [
+                    {
+                        "_id": "65b04bf770315e1fdc742caf",
+                        "courseTitle": "Anatomy",
+                        "courseScore": 90,
+                        "courseGrade": "Distinction"
+                    },
+                    {
+                        "_id": "65b04bf770315e1fdc742cae",
+                        "courseTitle": "Biochemistry",
+                        "courseScore": 85,
+                        "courseGrade": "High Pass"
+                    }
+                ],
+                "studentElectives": []
+            }
+        ],
+        "__v": 0
+    }
+]
