@@ -3,7 +3,7 @@ import SearchBar from "@/components/SearchBar";
 
 export default function Home() {
   return (
-    <div className="Home">
+    <div className="Home gradient-bg">
       <HomeHeader />
       <main className="main min-h-screen w-screen flex justify-center items-center">
         <SearchBar />

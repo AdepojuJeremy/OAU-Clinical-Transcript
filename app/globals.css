@@ -71,7 +71,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-backgroundColor text-foreground;
+    @apply bg-backgroundColor text-foreground text-base;
   }
 }
 
@@ -79,11 +79,25 @@
   @apply bg-primaryGray text-white px-2 py-1 rounded-lg text-[16px];
 }
 
+.admission-dropdown-list > li {
+  @apply py-1;
+  border-bottom: 1px solid black;
+}
+.admission-dropdown-list > li:last-child {
+  border-bottom: none;
+}
+
 .backdrop::after {
   position: absolute;
-  content: url("/gradient.svg");
+  content: url("/gradient-backdrop.svg");
   inset: 0;
   z-index: 1;
   opacity: 1;
   overflow: hidden;
+}
+.gradient-bg {
+  background: url("/gradient-bg.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
