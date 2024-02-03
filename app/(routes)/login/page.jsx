@@ -16,9 +16,9 @@ function page() {
         </div>
 
         <p className="font-crimson font-bold text-lg pt-8 ">
-          Don't have an account?{" "}
-          <Link href="signup" className="text-oauOrange pl-4">
-            Sign Up
+         Forgot Password?{" "}
+          <Link href="#" className="text-oauOrange pl-4">
+            reset
           </Link>
         </p>
       </main>
