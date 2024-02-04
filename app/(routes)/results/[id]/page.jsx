@@ -1,8 +1,10 @@
 import ResultsTable from "@/components/ResultsTable";
 import HomeHeader from "@/components/HomeHeader";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import axios from "axios";
 
-export default function ResultsPage() {
+export default async function ResultsPage(params) {
+  const response = awa;
   return (
     <>
       <HomeHeader />
