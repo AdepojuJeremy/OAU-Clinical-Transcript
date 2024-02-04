@@ -1,3 +1,4 @@
+'use client'
 import * as React from "react";
 
 import { Button } from "@/components/ui/button";
@@ -12,8 +13,10 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useRouter } from "next/navigation";
 
 export default function CardWithForm() {
+  const router = useRouter();
   return (
     <Card className="max-w-[800px] min-w-[350px]">
       <CardHeader>
@@ -51,10 +54,10 @@ export default function CardWithForm() {
               </span>
             </div>
           </div>
-        </form>
+        </form> 
       </CardContent>
       <CardFooter className="max-w-[90%] mx-auto py-10">
-        <Button size="full">Login</Button>
+        <Button onClick={() => router.push('/home')} size="full">Login</Button>
       </CardFooter>
     </Card>
   );

@@ -31,9 +31,9 @@ function SearchBar() {
   const [graduationDropOpen, setGraduationDropOpen] = useState(false);
   const [filterOpen, setFilterOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedAdmission, setSelectedAdmission] = useState('')
-  const [selectedGraduation, setSelectedGraduation] = useState('')
-  const [inputFiltrate, setInputFiltrate] = useState(students)
+  const [selectedAdmission, setSelectedAdmission] = useState("");
+  const [selectedGraduation, setSelectedGraduation] = useState("");
+  const [inputFiltrate, setInputFiltrate] = useState(students);
   const [filteredStudents, setFilteredStudents] = useState(students);
 
   // Ref
@@ -50,26 +50,31 @@ function SearchBar() {
         student.matricNo.toLowerCase().includes(value.toLowerCase()) ||
         student.name.toLowerCase().includes(value.toLowerCase())
     );
-      setInputFiltrate(filteredList)
+    setInputFiltrate(filteredList);
     setFilteredStudents(filteredList);
   };
 
   const filterGraduation = (value) => {
-      setFilteredStudents(
+    setFilteredStudents(
       inputFiltrate.filter((student) => student.graduationYear == value)
     );
-    setSelectedGraduation(value)
+    setSelectedGraduation(value);
   };
   const filterAdmission = (value) => {
     setFilteredStudents(
       inputFiltrate.filter((student) => student.admissionYear == value)
     );
-    setSelectedAdmission(value)
+    setSelectedAdmission(value);
   };
   const removeCriterion = () => {
-    setFilteredStudents(inputFiltrate)
-    setSelectedGraduation('')
-    setSelectedAdmission('')
+    const filteredList = students.filter(
+      (student) =>
+        student.matricNo.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        student.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredStudents(filteredList);
+    setSelectedGraduation("");
+    setSelectedAdmission("");
   };
 
   // useEffects
@@ -101,13 +106,13 @@ function SearchBar() {
     };
   }, []);
 
-  const handleClickOutside = (e) => {
-    if (search && !search.current.contains(e.target)) {
-      setSearchOpen(false);
-    }
-  };
-
   useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (search && !search.current.contains(e.target)) {
+        setSearchOpen(false);
+      }
+    };
+
     document.addEventListener("click", handleClickOutside);
 
     return () => {
@@ -161,10 +166,18 @@ function SearchBar() {
                       <div className="admission-dropdown absolute top-[110%] left-[50%] -translate-x-[50%] w-[120%] text-center z-10 opacity-100 visible bg-white shadow-md p-2 rounded-2xl">
                         <ul className="text-primaryBlue admission-dropdown-list max-h-[20rem] overflow-y-auto">
                           <li className="font-bold">Graduation Year</li>
-                          {
-                            Array.from({ length: 7 }, (_, index) => 2015 + index).map((year, i ,arr) => {
-                              return (<li
-                                className={`${selectedGraduation == year ? 'bg-primaryGray/20' : ''}`}
+                          {Array.from(
+                            { length: 7 },
+                            (_, index) => 2015 + index
+                          ).map((year, i, arr) => {
+                            return (
+                              <li
+                                key={i}
+                                className={`${
+                                  selectedGraduation == year
+                                    ? "bg-primaryGray/20"
+                                    : ""
+                                }`}
                               >
                                 <button
                                   onClick={(e) =>
@@ -173,11 +186,9 @@ function SearchBar() {
                                 >
                                   {year}
                                 </button>
-                              </li>)
-                            })
-                          }
-                          
-                          
+                              </li>
+                            );
+                          })}
                         </ul>
                       </div>
                     ) : (
@@ -197,11 +208,19 @@ function SearchBar() {
                       <div className="admission-dropdown absolute top-[110%] left-[50%] -translate-x-[50%] w-[120%] text-center z-10 opacity-100 visible bg-white shadow-md p-2 rounded-2xl">
                         <ul className="text-primaryBlue admission-dropdown-list max-h-[20rem] overflow-y-auto">
                           <li className="font-bold">Admission Year</li>
-                          {
-                            Array.from({ length: 7 }, (_, index) => 2003 + index).map((year, i ,arr) => {
-                              return (<li 
-                                className={`${selectedAdmission == year ? 'bg-primaryGray/20' : ''}`}
-                                >
+                          {Array.from(
+                            { length: 7 },
+                            (_, index) => 2003 + index
+                          ).map((year, i, arr) => {
+                            return (
+                              <li
+                                key={i}
+                                className={`${
+                                  selectedAdmission == year
+                                    ? "bg-primaryGray/20"
+                                    : ""
+                                }`}
+                              >
                                 <button
                                   onClick={(e) =>
                                     filterAdmission(e.target.textContent)
@@ -209,9 +228,9 @@ function SearchBar() {
                                 >
                                   {year}
                                 </button>
-                              </li>)
-                            })
-                          }
+                              </li>
+                            );
+                          })}
                         </ul>
                       </div>
                     ) : (
@@ -246,7 +265,7 @@ function SearchBar() {
                         <span>{matricNo}</span> <span>{name}</span>
                       </div>{" "}
                       <div>
-                        <Link className="text-oauOrange" href={""}>
+                        <Link href={'/results'} className="text-oauOrange">
                           View Results
                         </Link>
                       </div>

@@ -18,6 +18,9 @@ module.exports = {
       },
     },
     extend: {
+      backgroundImage: {
+        'welcome-bg': "url('/Welcome-page-bg.png')",
+      },
       fontFamily: {
         crimson: "var(--font-crimson)",
       },
