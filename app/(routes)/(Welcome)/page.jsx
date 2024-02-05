@@ -1,5 +1,5 @@
 import React from "react";
-import HeaderOne from "@/components/HeaderOne";
+import HeaderOne from "@/components/custom/HeaderOne";
 import Link from "next/link";
 
 function Welcome() {
@@ -16,7 +16,12 @@ function Welcome() {
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi
           </p>
-          <Link href={'/login'} className="px-4 py-2 text-white font-bold bg-primaryBlue rounded-lg">Get Started</Link>
+          <Link
+            href={"/login"}
+            className="px-4 py-2 text-white font-bold bg-primaryBlue rounded-lg"
+          >
+            Get Started
+          </Link>
         </div>
       </main>
     </div>

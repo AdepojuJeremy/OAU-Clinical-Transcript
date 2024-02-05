@@ -1,7 +1,7 @@
-import HomeHeader from "@/components/HomeHeader";
-import SearchBar from "@/components/SearchBar";
+import HomeHeader from "@/components/custom/HomeHeader";
+import SearchBar from "@/components/custom/SearchBar";
 
-export default function Home() {
+export default function Search() {
   return (
     <div className="Home gradient-bg">
       <HomeHeader />

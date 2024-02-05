@@ -1,6 +1,6 @@
 import React from "react";
-import HeaderOne from "@/components/HeaderOne";
-import LoginForm from "@/components/LoginForm";
+import HeaderOne from "@/components/custom/HeaderOne";
+import LoginForm from "@/components/custom/LoginForm";
 import Link from "next/link";
 
 function page() {
@@ -16,7 +16,7 @@ function page() {
         </div>
 
         <p className="font-crimson font-bold text-lg pt-8 ">
-         Forgot Password?{" "}
+          Forgot Password?{" "}
           <Link href="#" className="text-oauOrange pl-4">
             reset
           </Link>

@@ -24,12 +24,11 @@ import {
 
 function SearchBar() {
   // States
-  const suggestions = useRef(null);
-  const search = useRef(null);
+
   const [searchOpen, setSearchOpen] = useState(false);
+  const [filterOpen, setFilterOpen] = useState(false);
   const [admissionDropOpen, setAdmissionDropOpen] = useState(false);
   const [graduationDropOpen, setGraduationDropOpen] = useState(false);
-  const [filterOpen, setFilterOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedAdmission, setSelectedAdmission] = useState("");
   const [selectedGraduation, setSelectedGraduation] = useState("");
@@ -37,6 +36,8 @@ function SearchBar() {
   const [filteredStudents, setFilteredStudents] = useState(students);
 
   // Ref
+  const suggestions = useRef(null);
+  const search = useRef(null);
   const graduationDropRef = useRef(null);
   const admissionDropRef = useRef(null);
 
@@ -253,7 +254,7 @@ function SearchBar() {
             <CommandList ref={suggestions} className="w-full">
               <CommandGroup>
                 {filteredStudents.map((item, i, arr) => {
-                  const { name, matricNo } = item;
+                  const { name, matricNo, _id } = item;
                   return (
                     <CommandItem
                       key={i}
@@ -265,7 +266,7 @@ function SearchBar() {
                         <span>{matricNo}</span> <span>{name}</span>
                       </div>{" "}
                       <div>
-                        <Link href={'/results'} className="text-oauOrange">
+                        <Link href={`search/${_id}`} className="text-oauOrange">
                           View Results
                         </Link>
                       </div>
