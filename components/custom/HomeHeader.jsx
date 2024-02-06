@@ -23,7 +23,7 @@ function HomeHeader() {
           />
         </div>
         <Link
-          href={"/home"}
+          href={"/search"}
           className="absolute flex flex-col items-center text-[32px]/[3rem] 2xl:text-[40px] text uppercase w-[40vw] text-center font-bold text-primaryBlue justify-self-center left-[50%] -translate-x-[50%] top-[50%] -translate-y-[50%]"
         >
           <span>OAU TRANSCRIPT</span>
@@ -32,7 +32,7 @@ function HomeHeader() {
         <Menubar className="justify-self-end">
           <MenubarMenu>
             {navItems.map((item, i) => {
-              return <MenubarTrigger>{item}</MenubarTrigger>;
+              return <MenubarTrigger key={i}>{item}</MenubarTrigger>;
             })}
           </MenubarMenu>
         </Menubar>

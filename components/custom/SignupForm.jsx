@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
+import { Input } from "@/components/ui/InputCont";
 import { Label } from "@/components/ui/label";
 
 export default function CardWithForm() {
