@@ -19,10 +19,6 @@ const TableSection = () => {
   return (
     <Table>
       <TableHeader className="border-primaryGray">
-        {/* <TableRow className="text-black">
-          <TableHead className="w-200">Column 1</TableHead>
-          <TableHead className="w-full cols-2" colspan="2"></TableHead>
-        </TableRow> */}
         <TableRow className=" bg-placeholder text-black" isHeaderRow={true}>
           <TableHead className="capitalize text-black font-bold text-center">
             Anatomy

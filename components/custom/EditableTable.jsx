@@ -1,28 +1,55 @@
-import React from "react";
+"use client";
 import {
   Table,
   TableBody,
-  TableCaption,
-  TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useState } from "react";
 
 //would change this later
 import students from "@/schem.json";
+const EditableCell = ({ value, onSave, className }) => {
+  const [editing, setEditing] = useState(false);
+  const [cellValue, setCellValue] = useState(value);
+
+  const handleDoubleClick = () => {
+    setEditing(true);
+  };
+
+  const handleBlur = () => {
+    setEditing(false);
+    onSave(cellValue);
+  };
+
+  const handleChange = (e) => {
+    setCellValue(e.target.innerText);
+  };
+  return (
+    <td
+      onDoubleClick={handleDoubleClick}
+      onBlur={handleBlur}
+      contentEditable={editing}
+      suppressContentEditableWarning={true}
+      onInput={handleChange}
+      className={className}
+    >
+      {cellValue}
+    </td>
+  );
+};
 
 const TableSection = () => {
+  const handleCellSave = (value) => {
+    //set the value of state
+    console.log("Saving value:", value);
+  };
   return (
     <Table>
       <TableHeader className="border-primaryGray">
-        {/* <TableRow className="text-black">
-          <TableHead className="w-200">Column 1</TableHead>
-          <TableHead className="w-full cols-2" colspan="2"></TableHead>
-        </TableRow> */}
         <TableRow className=" bg-placeholder text-black" isHeaderRow={true}>
           <TableHead className="capitalize text-black font-bold text-center">
             Anatomy
@@ -37,16 +64,21 @@ const TableSection = () => {
       </TableHeader>
       <TableBody className="border-primaryGray">
         <TableRow key={1}>
-          <TableCell className="border-r border-primaryGray text-black font-bold text-center">
-            {" "}
-            {"70"}
-          </TableCell>
-          <TableCell className=" border-r border-primaryGray text-black font-bold text-center">
-            {"70"}
-          </TableCell>
-          <TableCell className=" border-primaryGray  text-black font-bold text-center">
-            {"70"}
-          </TableCell>
+          <EditableCell
+            value={"70"}
+            onSave={(value) => handleCellSave(value)}
+            className="border-r border-primaryGray text-black font-bold text-center"
+          />
+          <EditableCell
+            value={"70"}
+            onSave={(value) => handleCellSave(value)}
+            className="border-r border-primaryGray text-black font-bold text-center"
+          />
+          <EditableCell
+            value={"70"}
+            onSave={(value) => handleCellSave(value)}
+            className=" text-black font-bold text-center"
+          />
         </TableRow>
       </TableBody>
     </Table>
