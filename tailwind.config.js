@@ -19,7 +19,7 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        'welcome-bg': "url('/Welcome-page-bg.png')",
+        "welcome-bg": "url('/Welcome-page-bg.png')",
       },
       fontFamily: {
         crimson: "var(--font-crimson)",
@@ -66,6 +66,8 @@ module.exports = {
         primaryGray: "#8487A9",
         oauOrange: "#FFC238",
         placeholder: "#C1C2D4",
+        primaryVariant: "#3848FF",
+        lightGray: "#E5E9ED",
       },
       borderRadius: {
         lg: "var(--radius)",

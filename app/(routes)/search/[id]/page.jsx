@@ -1,29 +1,17 @@
 import OverviewTable from "@/components/custom/OverviewTable";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-
-import HomeHeader from "@/components/custom/HomeHeader";
-import AvatarProfile from "@/components/custom/AvatarProfile";
+import StudentProfileLayout from "@/components/custom/StudentProfileLayout";
 
 export default async function StudentInfo({ params }) {
   //fetch data here using the id
   console.log(params);
   return (
     <>
-      <HomeHeader />
-      <main className="gradient-bg min-h-screen pt-[10rem] w-full flex items-center justify-center flex-col flex-1 pb-8">
-        {/* should be dynamic */}
-        <AvatarProfile
-          src="https://github.com/shadcn.png"
-          alt={"@shadcn"}
-          fallback="CN"
-          name="John Doe"
-          matricNo="CLI/20XX/XXX"
-        />
-
+      <StudentProfileLayout>
         <div className="w-[500px]  mt-10 flex flex-col gap-8 items-center">
           <h2 className="text-oauOrange self-start font-bold text-[24px]">
-            Student Inform7ation
+            Student Information
           </h2>
           <OverviewTable
             name="John Doe"
@@ -43,7 +31,7 @@ export default async function StudentInfo({ params }) {
             </Link>
           </div>
         </div>
-      </main>
+      </StudentProfileLayout>
     </>
   );
 }

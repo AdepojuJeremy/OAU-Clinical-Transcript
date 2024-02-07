@@ -11,6 +11,11 @@ const buttonVariants = cva(
       variant: {
         default:
           "bg-primaryBlue text-md text-primary-foreground hover:text-oauOrange",
+        pass: " bg-primaryVariant text-md text-primary-foreground rounded-none  uppercase w-[100px] ",
+        resit:
+          " bg-lightGray  text-md text-oauOrange rounded-none uppercase   w-[100px] ",
+        repeat:
+          " bg-lightGray text-md text-red-500 rounded-none  uppercase w-[100px] ",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:

@@ -1,17 +1,23 @@
-import ResultsTable from "@/components/custom/ResultsTable";
-import HomeHeader from "@/components/custom/HomeHeader";
-import AvatarProfile from "@/components/custom/AvatarProfile";
-// import axios from "axios";
+import EditableTable from "@/components/custom/EditableTable";
+import StudentProfileLayout from "@/components/custom/StudentProfileLayout";
+import { Button } from "@/components/ui/button";
 
 export default async function ResultsPage({ params }) {
   // const response = awa;
   return (
     <>
-      <HomeHeader />
-      <main className="gradient-bg min-h-screen pt-[10rem] w-full flex items-center justify-center flex-col flex-1 pb-8">
-        <AvatarProfile />
-        <ResultsTable />
-      </main>
+      <StudentProfileLayout>
+        <div className="w-[80%] min-w-[300px] py-14 flex flex-col ">
+          <h2 className="font-bold capitalize text-OrangeOau mb-4 text-[24px]">
+            {" "}
+            Input Results{" "}
+          </h2>
+          <EditableTable />
+          <Button className="capitalize self-end" variant="default">
+            upload Results
+          </Button>
+        </div>
+      </StudentProfileLayout>
     </>
   );
 }
