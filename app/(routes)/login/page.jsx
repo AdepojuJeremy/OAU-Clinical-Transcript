@@ -2,12 +2,10 @@ import React from "react";
 import HeaderOne from "@/components/custom/HeaderOne";
 import LoginForm from "@/components/custom/LoginForm";
 import Link from "next/link";
-import { Provider } from "react-redux";
-import store from "@/store/store";
+
 
 function page() {
   return (
-    <Provider store={store}>
       <div className="relative min-h-screen w-full bg-backgroundColor">
         <HeaderOne />
         <main
@@ -26,7 +24,6 @@ function page() {
           </p>
         </main>
       </div>
-    </Provider>
   );
 }
 

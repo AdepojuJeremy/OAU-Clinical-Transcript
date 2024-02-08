@@ -15,17 +15,20 @@ import { Checkbox } from "@/components/ui/checkbox";
 import InputCont from "@/components/ui/InputCont";
 import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { setPasswordVisible } from "@/app/GlobalRedux/slices/AppSlice";
 
 export default function CardWithForm() {
+  const dispatch = useDispatch()
   const router = useRouter();
 
   // States
+  const {passwordVisible} = useSelector((st) => st.app)
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
   const [formErr, setFormErr] = useState("");
-  const [passwordVisible, setPasswordVisible] = useState(false);
 
   // Function
   const handleChange = (e) => {
@@ -78,7 +81,6 @@ export default function CardWithForm() {
                   className={"justify-between items-center"}
                   id="password"
                   name="password"
-                  passwordVisible={passwordVisible}
                   onChange={handleChange}
                   placeholder="Enter your password"
                   isPasswordComp={true}
@@ -86,10 +88,10 @@ export default function CardWithForm() {
                   {passwordVisible ? (
                     <FaEyeSlash
                       size={28}
-                      onClick={() => setPasswordVisible(false)}
+                      onClick={() => dispatch(setPasswordVisible(false))}
                     />
                   ) : (
-                    <FaEye size={28} onClick={() => setPasswordVisible(true)} />
+                    <FaEye size={28} onClick={() => dispatch(setPasswordVisible(true))} />
                   )}
                 </InputCont>
               </div>
