@@ -13,7 +13,17 @@ Project OAU Transcript is a pioneering free initiative aimed at enhancing access
 
 ## Todos
 
-[] - Complete styling
-[] - Data fetching
-[] - Integrate backend
-[] - Convert to typescript
+- [ ] Header responsiveness
+- [ ] Welcome page width
+- [ ] Page Loader
+- [ ] Restricted route / next-auth
+- [ ] Login Api request
+- [ ] Storage of token and response
+- [ ] Search bar on mobile
+- [ ] Search fetch api request (on key press)
+- [ ] Clicking on option on dropdown. Doesnt work untl you click the view results.
+- [ ] Api request on clicking on the option and storing in state (student data stored in state)
+- [ ] Use data stored in state to render profile, view results page
+- [ ] Fix Logo on student profile header template
+- [ ] Api post request on uploading the result (file)
+- [ ] Convert to typescript
