@@ -1,10 +1,10 @@
-'use client'
+"use client";
 import * as React from "react";
-import { useSelector } from "react-redux";}
+import { useSelector } from "react-redux";
 import { cn } from "@/lib/utils";
 
 const InputCont = ({ className, children, isPasswordComp, ...props }) => {
-const {passwordVisible} = useSelector((st) => st.app)
+  const { passwordVisible } = useSelector((st) => st.app);
   return (
     <div
       className={cn(
@@ -14,8 +14,8 @@ const {passwordVisible} = useSelector((st) => st.app)
     >
       <input
         className="w-full file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground bg-transparent focus-visible:outline-none focus:bg-none "
-        type={isPasswordComp ? (passwordVisible ? 'text' : 'password') : 'text'}
-      {...props}
+        type={isPasswordComp ? (passwordVisible ? "text" : "password") : "text"}
+        {...props}
         // ref={ref}
       />
       {children}
