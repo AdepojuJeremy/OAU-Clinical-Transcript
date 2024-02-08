@@ -1,7 +1,9 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
-import students from "@/schem.json";
+import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { setStudents } from "@/app/GlobalRedux/slices/AppSlice";
 import {
   Command,
   CommandDialog,
@@ -15,8 +17,11 @@ import {
 } from "@/components/ui/command";
 
 function SearchBar() {
-  // States
+  // Some nice declarations
+  const dispatch = useDispatch();
 
+  // States
+  const { students } = useSelector((st) => st.app);
   const [searchOpen, setSearchOpen] = useState(false);
   const [filterOpen, setFilterOpen] = useState(false);
   const [admissionDropOpen, setAdmissionDropOpen] = useState(false);
@@ -24,8 +29,8 @@ function SearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedAdmission, setSelectedAdmission] = useState("");
   const [selectedGraduation, setSelectedGraduation] = useState("");
-  const [inputFiltrate, setInputFiltrate] = useState(students);
-  const [filteredStudents, setFilteredStudents] = useState(students);
+  const [inputFiltrate, setInputFiltrate] = useState([]);
+  const [filteredStudents, setFilteredStudents] = useState([]);
 
   // Ref
   const suggestions = useRef(null);
@@ -60,15 +65,14 @@ function SearchBar() {
     setSelectedAdmission(value);
   };
   const removeCriterion = () => {
-    const filteredList = students.filter(
-      (student) =>
-        student.matricNo.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        student.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredStudents(filteredList);
+    setFilteredStudents(students);
+    setInputFiltrate(students);
     setSelectedGraduation("");
     setSelectedAdmission("");
   };
+  useEffect(() => {
+    console.log(filteredStudents);
+  }, [filteredStudents]);
 
   // useEffects
   useEffect(() => {
@@ -98,6 +102,30 @@ function SearchBar() {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    const fetchStudents = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/students");
+        dispatch(setStudents(response.data));
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchStudents();
+  }, []);
+  useEffect(() => {
+    if (students.length) {
+      setFilteredStudents(students);
+      setInputFiltrate(students);
+    }
+  }, [students]);
+  useEffect(() => {
+    if (!searchTerm && !selectedAdmission && !selectedGraduation) {
+      setFilteredStudents(students);
+      setInputFiltrate(students);
+    }
+  }, [searchTerm, selectedAdmission, selectedGraduation]);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
