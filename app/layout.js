@@ -1,6 +1,6 @@
 import { Inter, Crimson_Text } from "next/font/google";
 import "./globals.css";
-
+import Providers from "./GlobalRedux/provider";
 export const inter = Inter({ subsets: ["latin"] });
 export const crimson = Crimson_Text({
   weight: ["400", "700"],
@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${inter.className} ${crimson.variable} `}>
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
