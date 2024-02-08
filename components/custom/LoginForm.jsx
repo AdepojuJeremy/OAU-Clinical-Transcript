@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-
+import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import {
@@ -19,11 +19,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPasswordVisible } from "@/app/GlobalRedux/slices/AppSlice";
 
 export default function CardWithForm() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const router = useRouter();
 
   // States
-  const {passwordVisible} = useSelector((st) => st.app)
+  const { passwordVisible } = useSelector((st) => st.app);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -45,7 +45,20 @@ export default function CardWithForm() {
     if (!email) return setFormErr("Please input an email address.");
     if (!password) return setFormErr("Please input a password.");
     if (!emailRegex.test(email)) return setFormErr("Invalid Email Address.");
-    router.push("/search");
+
+    const submitForm = async () => {
+      try {
+        const response = await axios.post("api/users", {
+          email,
+          password,
+        });
+        console.log(response?.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    submitForm();
+    // router.push("/search");
   };
   return (
     <Card className="max-w-[800px] min-w-[350px]">
@@ -91,7 +104,10 @@ export default function CardWithForm() {
                       onClick={() => dispatch(setPasswordVisible(false))}
                     />
                   ) : (
-                    <FaEye size={28} onClick={() => dispatch(setPasswordVisible(true))} />
+                    <FaEye
+                      size={28}
+                      onClick={() => dispatch(setPasswordVisible(true))}
+                    />
                   )}
                 </InputCont>
               </div>
