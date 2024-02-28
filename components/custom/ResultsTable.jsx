@@ -4,9 +4,6 @@ import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Table,TableBody,TableCell,TableHead,TableHeader,TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-
-
-
 import { useSelector } from "react-redux";
 
 
@@ -45,7 +42,7 @@ const ResultsTable = () => {
           
         {classes.slice(0,-2).map((level, index) => {
           const levelArr = data.details[0][level]
-          const variantName =  grade(levelArr)
+          const variantName =  grade(levelArr);
 return (
   <div key={index} className=" flex flex-col gap-5 mb-10">
               <div className="border-primaryGray border rounded ">

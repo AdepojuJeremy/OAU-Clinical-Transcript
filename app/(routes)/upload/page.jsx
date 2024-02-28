@@ -8,7 +8,7 @@ export default function Upload() {
 <div className="Home gradient-bg">
       <HomeHeader />
       <main className="main min-h-screen w-screen flex justify-center items-center">
-        <SearchBar  linkText={"View Results"}  currPage={"results"}/>
+        <SearchBar  linkText={"upload"}  currPage={"upload"}/>
       </main>
     </div> 
     
