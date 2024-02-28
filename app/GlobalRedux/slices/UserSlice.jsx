@@ -9,8 +9,7 @@ const userSlice = createSlice({
     
   },
   reducers: {
-   
-    setCredentials(state,{payload}){
+   setCredentials(state,{payload}){
 localStorage.setItem('userInfo', JSON.stringify(payload));
 state.isLoggedIn = true;
 state.credentials = payload;

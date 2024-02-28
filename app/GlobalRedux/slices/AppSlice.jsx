@@ -1,10 +1,11 @@
 "use client";
 import { createSlice } from "@reduxjs/toolkit";
-
+import data from "@/_data/students.json"
 const appSlice = createSlice({
   name: "app",
   initialState: {
-    students: [],
+    //TODO: edit this
+    students: data ?? [],
     passwordVisible: false,
     
   },
