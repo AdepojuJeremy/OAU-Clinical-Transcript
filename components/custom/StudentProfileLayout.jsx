@@ -1,7 +1,11 @@
+"use client"
 import HomeHeader from "@/components/custom/HomeHeader";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useSelector } from "react-redux";
 
-export default async function Student({ params, children }) {
+
+export default async function Student({  children }) {
+  const { selectedStudentData:data } = useSelector((st) => st.app);
   // const response = awa;
   return (
     <>
@@ -15,9 +19,9 @@ export default async function Student({ params, children }) {
             />
             <AvatarFallback>{"CN"}</AvatarFallback>
           </Avatar>
-          <p className="text-[32px] font-bold text-primaryBlue">{"John Doe"}</p>
+          <p className="text-[32px] font-bold text-primaryBlue">{data.name}</p>
           <p className="text-[32px] font-bold text-primaryGray">
-            {"CLI/20XX/XXX"}
+            {data.matricNo}
           </p>
         </div>
 

@@ -1,47 +1,71 @@
 "use client"
 
-import React, {useState} from "react";
+import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Table,TableBody,TableCell,TableHead,TableHeader,TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-// import { useDispatch, useSelector } from "react-redux";
-// import { setPasswordVisible } from "@/app/GlobalRedux/slices/AppSlice";
 
+
+
+import { useSelector } from "react-redux";
+
+
+function grade(courses) {
+  let below50Count = 0;
+
+  for (let i = 0; i < courses.length; i++) {
+    const course = courses[i];
+
+    if (course.courseScore < 50) {
+      below50Count++;
+    }
+  }
+  if (below50Count === 0) {
+    return "Pass";
+  } else if (below50Count === 1) {
+    return "Resit";
+  } else if (below50Count === 2) {
+    return "Repeat";
+  } else {
+    return "Withdraw";
+  }
+}
 
 const ResultsTable = () => {
-  const [data,setData] = useState()
-  fetch('@/studentData.json')
-  .then(response => response.json())
-  .then(data => {
-    // Access the data object
-    console.log(data);
-    // You can now use the data object to populate your web application,
-    // such as displaying student information or calculating statistics.
-  })
-  .catch(error => {
-    console.error('Error fetching data:', error);
-  });
+
+  const { selectedStudentData:data } = useSelector((st) => st.app);
+  const classes = Object.keys(data.details[0]);
+
+
 
   return (
    
       <Card className="mb-5">
         <CardContent className="pt-8">
-          {data?.details?.map((level, index) => ( // Check if data.details exists
-            <div key={index} className=" flex flex-col gap-5 mb-10">
+          
+        {classes.slice(0,-2).map((level, index) => {
+          const levelArr = data.details[0][level]
+          const variantName =  grade(levelArr)
+return (
+  <div key={index} className=" flex flex-col gap-5 mb-10">
               <div className="border-primaryGray border rounded ">
                 <div className="h-[40px] w-full grid items-center px-2">
-                  <div className="border-r font-bold border-primaryGray grid items-center h-full w-[fit-content]  pr-3">
-                    {`${index + 2}00L 19/20 Session`}
+                  <div className="border-r font-bold border-primaryGray grid items-center h-full w-[fit-content] ">
+                   <span className="mr-5"> {`${index + 2}00L 19/20 Session`}</span>
                   </div>
                 </div>
     
-                <TableSection level={level} />
+                <TableSection level={levelArr} />
               </div>
-              {/* Button logic can be implemented here based on data's performance */}
-              {/* <Button className="self-end " variant="pass">
-                Pass
-              </Button> */}
+
+              {/* // TODO: Fix button style */}
+       
+              <Button className="self-end " variant= {`variantName`}>
+                {variantName}
+              </Button> 
             </div>
-          ))}
+)
+        })}
         </CardContent>
       </Card>
     );

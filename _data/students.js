@@ -1,4 +1,4 @@
-[
+const students = [
     {
       "_id": "65bd5453149572fe3b0a3748",
       "name": "John Doe",
@@ -491,3 +491,5 @@
       "__v": 0
     }
   ]
+
+  export default students;

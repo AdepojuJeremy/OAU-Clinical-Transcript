@@ -2,8 +2,9 @@ import ResultsTable from "@/components/custom/ResultsTable";
 import StudentProfileLayout from "@/components/custom/StudentProfileLayout";
 import { Button } from "@/components/ui/button";
 
+
 export default async function ResultsPage({ params }) {
-  // const response = awa;
+
   return (
     <>
       <StudentProfileLayout>

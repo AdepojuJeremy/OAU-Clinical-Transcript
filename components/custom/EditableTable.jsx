@@ -10,8 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState } from "react";
 
-//would change this later
-import students from "@/schem.json";
+
 const EditableCell = ({ value, onSave, className }) => {
   const [editing, setEditing] = useState(false);
   const [cellValue, setCellValue] = useState(value);
