@@ -17,3 +17,7 @@ Project OAU Transcript is a pioneering free initiative aimed at enhancing access
 [] - Data fetching
 [] - Integrate backend
 [] - Convert to typescript
+[ ] - auto log in
+
+
+

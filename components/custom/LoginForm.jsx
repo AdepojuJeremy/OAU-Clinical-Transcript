@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -17,16 +17,20 @@ import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { setPasswordVisible } from "@/app/GlobalRedux/slices/AppSlice";
+import { useRememberMe } from "@/hooks/useRememberMe";
 
 export default function CardWithForm() {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  // Utilize the useRememberMe hook for remember me state and functions
+  const { rememberMe, handleRememberMeChange ,storeRememberMe,clearRememberMe} = useRememberMe();
+
   // States
   const { passwordVisible } = useSelector((st) => st.app);
   const [formData, setFormData] = useState({
     email: "",
-    password: "",
+    password: ""
   });
   const [formErr, setFormErr] = useState("");
 
@@ -38,13 +42,18 @@ export default function CardWithForm() {
       [name]: value,
     });
   };
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const { email, password } = formData;
+
     if (!email) return setFormErr("Please input an email address.");
     if (!password) return setFormErr("Please input a password.");
     if (!emailRegex.test(email)) return setFormErr("Invalid Email Address.");
+
+  rememberMe ? storeRememberMe() : clearRememberMe()
+  
 
     const submitForm = async () => {
       try {
@@ -57,9 +66,10 @@ export default function CardWithForm() {
         console.log(err);
       }
     };
+
     submitForm();
-    // router.push("/search");
   };
+
   return (
     <Card className="max-w-[800px] min-w-[350px]">
       <CardHeader>
@@ -84,7 +94,7 @@ export default function CardWithForm() {
                 name="email"
                 onChange={handleChange}
                 placeholder="Enter your email/username"
-              ></InputCont>
+              />
             </div>
 
             <div className="flex flex-col space-y-2.5">
@@ -99,23 +109,19 @@ export default function CardWithForm() {
                   isPasswordComp={true}
                 >
                   {passwordVisible ? (
-                    <FaEyeSlash
-                      size={28}
-                      onClick={() => dispatch(setPasswordVisible(false))}
-                    />
+                    <FaEyeSlash size={28} onClick={() => dispatch(setPasswordVisible(false))} />
                   ) : (
-                    <FaEye
-                      size={28}
-                      onClick={() => dispatch(setPasswordVisible(true))}
-                    />
+                    <FaEye size={28} onClick={() => dispatch(setPasswordVisible(true))} />
                   )}
                 </InputCont>
               </div>
             </div>
 
+
             <div className="flex justify-between">
               <div className="flex items-center space-x-2">
-                <Checkbox id="terms" />
+       
+              <Checkbox id="terms" onCheckedChange={handleRememberMeChange} />
                 <label
                   htmlFor="terms"
                   className="text-sm text-primaryGray font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -124,7 +130,9 @@ export default function CardWithForm() {
                 </label>
               </div>
               <span className="text-primaryBlue font-medium">
-                Forgot Password?
+                {/* //TODO: Forgot password functionality */}
+                <a href="#">  Forgot Password?</a>
+              
               </span>
             </div>
           </div>

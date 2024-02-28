@@ -6,6 +6,7 @@ const appSlice = createSlice({
   initialState: {
     students: [],
     passwordVisible: false,
+    
   },
   reducers: {
     setPasswordVisible: (state, {payload}) => {

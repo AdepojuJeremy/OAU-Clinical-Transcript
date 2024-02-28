@@ -2,7 +2,7 @@ import EditableTable from "@/components/custom/EditableTable";
 import StudentProfileLayout from "@/components/custom/StudentProfileLayout";
 import { Button } from "@/components/ui/button";
 
-export default async function ResultsPage({ params }) {
+export default async function UploadPage({ params }) {
   // const response = awa;
   return (
     <>

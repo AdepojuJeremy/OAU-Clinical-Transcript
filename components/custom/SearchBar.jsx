@@ -16,7 +16,7 @@ import {
   CommandShortcut,
 } from "@/components/ui/command";
 
-function SearchBar() {
+function SearchBar({linkText,currPage}) {
   // Some nice declarations
   const dispatch = useDispatch();
 
@@ -286,8 +286,8 @@ function SearchBar() {
                         <span>{matricNo}</span> <span>{name}</span>
                       </div>{" "}
                       <div>
-                        <Link href={`search/${_id}`} className="text-oauOrange">
-                          View Results
+                        <Link href={`${currPage}/${_id}`} className="text-oauOrange">
+                          {linkText}
                         </Link>
                       </div>
                     </CommandItem>
