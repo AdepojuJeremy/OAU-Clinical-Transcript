@@ -1,7 +1,5 @@
-"use client";
-import React, { useRef, useState, useEffect } from "react";
-import Link from "next/link";
-import axios from "axios";
+import React, { useRef, useState, useEffect, useCallback } from "react";
+import axios, { CancelToken, isAxiosError } from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { setStudents } from "@/app/GlobalRedux/slices/AppSlice";
 import {
@@ -16,287 +14,98 @@ import {
   CommandShortcut,
 } from "@/components/ui/command";
 
-function SearchBar({linkText,currPage}) {
-  // Some nice declarations
+function SearchBar({ linkText, currPage }) {
   const dispatch = useDispatch();
-
-  // States
   const { students } = useSelector((st) => st.app);
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [filterOpen, setFilterOpen] = useState(false);
-  const [admissionDropOpen, setAdmissionDropOpen] = useState(false);
-  const [graduationDropOpen, setGraduationDropOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedAdmission, setSelectedAdmission] = useState("");
-  const [selectedGraduation, setSelectedGraduation] = useState("");
-  const [inputFiltrate, setInputFiltrate] = useState([]);
   const [filteredStudents, setFilteredStudents] = useState([]);
+  const abortControllerRef = useRef(null);
 
-  // Ref
-  const suggestions = useRef(null);
-  const search = useRef(null);
-  const graduationDropRef = useRef(null);
-  const admissionDropRef = useRef(null);
-
-  // functions
-  const filteredSearch = (value) => {
+  const filteredSearch = useCallback(async (value) => {
     setSearchTerm(value);
 
-    // Filter the students based on the matric number or name
-    const filteredList = students.filter(
-      (student) =>
-        student.matricNo.toLowerCase().includes(value.toLowerCase()) ||
-        student.name.toLowerCase().includes(value.toLowerCase())
-    );
-    setInputFiltrate(filteredList);
-    setFilteredStudents(filteredList);
-  };
+    // Cancel any previous requests before sending a new one
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
 
-  const filterGraduation = (value) => {
-    setFilteredStudents(
-      inputFiltrate.filter((student) => student.graduationYear == value)
-    );
-    setSelectedGraduation(value);
-  };
-  const filterAdmission = (value) => {
-    setFilteredStudents(
-      inputFiltrate.filter((student) => student.admissionYear == value)
-    );
-    setSelectedAdmission(value);
-  };
+    const cancelToken = new CancelToken(cancel => {
+      abortControllerRef.current = cancel;
+    });
+
+    console.log("Search term:", value); // Log search term for testing
+
+    try {
+      console.log("request made")
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_API_URL}/api/transcript/allStudents?key=${value}`,
+        { cancelToken }
+      );
+
+      console.log("API response:", response.data); // Log API response for testing
+      dispatch(setStudents(response.data));
+      setFilteredStudents(response.data);
+    } catch (error) {
+      if (!isAxiosError(error)) {
+        throw error; // Re-throw non-axios errors
+      }
+      console.error("Error:", error.message); // Log errors gracefully
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    // Cleanup function to clear the abort controller on unmount
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    filteredSearch(searchTerm); // Perform initial search
+  }, [searchTerm, filteredSearch]);
+
   const removeCriterion = () => {
     setFilteredStudents(students);
-    setInputFiltrate(students);
-    setSelectedGraduation("");
-    setSelectedAdmission("");
+    setSearchTerm("");
   };
-  useEffect(() => {
-    console.log(filteredStudents);
-  }, [filteredStudents]);
-
-  // useEffects
-  useEffect(() => {
-    if (admissionDropOpen) setGraduationDropOpen(false);
-  }, [admissionDropOpen]);
-  useEffect(() => {
-    if (graduationDropOpen) setAdmissionDropOpen(false);
-  }, [graduationDropOpen]);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        graduationDropRef.current &&
-        !graduationDropRef.current.contains(event.target) &&
-        admissionDropRef.current &&
-        !admissionDropRef.current.contains(event.target)
-      ) {
-        // Clicked outside both dropdowns, close them
-        setGraduationDropOpen(false);
-        setAdmissionDropOpen(false);
-      }
-    };
-
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
-
-  useEffect(() => {
-    const fetchStudents = async () => {
-      try {
-        const response = await axios.get("http://localhost:4000/students");
-        dispatch(setStudents(response.data));
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchStudents();
-  }, []);
-  useEffect(() => {
-    if (students.length) {
-      setFilteredStudents(students);
-      setInputFiltrate(students);
-    }
-  }, [students]);
-  useEffect(() => {
-    if (!searchTerm && !selectedAdmission && !selectedGraduation) {
-      setFilteredStudents(students);
-      setInputFiltrate(students);
-    }
-  }, [searchTerm, selectedAdmission, selectedGraduation]);
-
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (search && !search.current.contains(e.target)) {
-        setSearchOpen(false);
-      }
-    };
-
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
 
   return (
-    <Command
-      ref={search}
-      className={`${
-        !searchOpen ? "" : "mt-[10%]"
-      } w-[40%] rounded-xl justify-between items-center px-4 `}
-    >
-      <div
-        className={`flex flex-row w-full justify-between items-center gap-6 ${
-          searchOpen ? "border-b" : ""
-        } `}
-      >
+    <Command className={`${!searchTerm ? "" : "mt-[10%]"} w-[40%] rounded-xl justify-between items-center px-4`}>
+      <div className={`flex flex-row w-full justify-between items-center gap-6 ${searchTerm ? "border-b" : ""}`}>
         <CommandInput
-          onClick={() => setSearchOpen(true)}
+          value={searchTerm}
           onChange={(e) => filteredSearch(e.target.value)}
           className="placeholder:italic text-primaryBlue placeholder:text-primaryBlue border-none"
           placeholder="Search by Name or Matric No."
         />
-        <img
-          src="./mi_filter.svg"
-          alt="mi_filter"
-          className="h-8 w-8 "
-          onClick={() => setFilterOpen(!filterOpen)}
-        />
+        <img src="./mi_filter.svg" alt="mi_filter" className="h-8 w-8" onClick={() => setFilterOpen(!filterOpen)} />
       </div>
 
-      {searchOpen && (
-        <div className="min-h-[22rem] w-full">
-          <>
-            {filterOpen ? (
-              <div className="filter w-full flex justify-between items-center text-primaryBlue py-4">
-                <div>Filter by</div>
-                <div className="filter-tags flex-1 flex justify-between max-w-[65%]">
-                  <div className="graduation relative" ref={graduationDropRef}>
-                    <button
-                      className={`text-white px-2 py-1 rounded-lg  ${
-                        graduationDropOpen ? "bg-primaryBlue" : "bg-primaryGray"
-                      }`}
-                      onClick={() => setGraduationDropOpen(!graduationDropOpen)}
-                    >
-                      Graduation Year
-                    </button>
-                    {graduationDropOpen ? (
-                      <div className="admission-dropdown absolute top-[110%] left-[50%] -translate-x-[50%] w-[120%] text-center z-10 opacity-100 visible bg-white shadow-md p-2 rounded-2xl">
-                        <ul className="text-primaryBlue admission-dropdown-list max-h-[20rem] overflow-y-auto">
-                          <li className="font-bold">Graduation Year</li>
-                          {Array.from(
-                            { length: 7 },
-                            (_, index) => 2015 + index
-                          ).map((year, i, arr) => {
-                            return (
-                              <li
-                                key={i}
-                                className={`${
-                                  selectedGraduation == year
-                                    ? "bg-primaryGray/20"
-                                    : ""
-                                }`}
-                              >
-                                <button
-                                  onClick={(e) =>
-                                    filterGraduation(e.target.textContent)
-                                  }
-                                >
-                                  {year}
-                                </button>
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      </div>
-                    ) : (
-                      <></>
-                    )}
+      {searchTerm && (
+        <CommandList>
+          <CommandGroup>
+            {filteredStudents.map((item, i, arr) => {
+              const { name, matricNo, _id } = item;
+              return (
+                <CommandItem
+                  key={i}
+                  className={`flex justify-between bg-none font-medium py-2 text-base ${i !== arr.length - 1 ? "border-b" : ""}`}
+                >
+                  <div className="flex gap-4 text-primaryGray">
+                    <span>{matricNo}</span> <span>{name}</span>
                   </div>
-                  <div className="admission relative" ref={admissionDropRef}>
-                    <button
-                      className={`text-white px-2 py-1 rounded-lg ${
-                        admissionDropOpen ? "bg-primaryBlue" : "bg-primaryGray"
-                      }`}
-                      onClick={() => setAdmissionDropOpen(!admissionDropOpen)}
-                    >
-                      Admission Year
-                    </button>
-                    {admissionDropOpen ? (
-                      <div className="admission-dropdown absolute top-[110%] left-[50%] -translate-x-[50%] w-[120%] text-center z-10 opacity-100 visible bg-white shadow-md p-2 rounded-2xl">
-                        <ul className="text-primaryBlue admission-dropdown-list max-h-[20rem] overflow-y-auto">
-                          <li className="font-bold">Admission Year</li>
-                          {Array.from(
-                            { length: 7 },
-                            (_, index) => 2003 + index
-                          ).map((year, i, arr) => {
-                            return (
-                              <li
-                                key={i}
-                                className={`${
-                                  selectedAdmission == year
-                                    ? "bg-primaryGray/20"
-                                    : ""
-                                }`}
-                              >
-                                <button
-                                  onClick={(e) =>
-                                    filterAdmission(e.target.textContent)
-                                  }
-                                >
-                                  {year}
-                                </button>
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      </div>
-                    ) : (
-                      <></>
-                    )}
+                  <div>
+                    <Link href={`${currPage}/${_id}`} className="text-oauOrange">
+                      {linkText}
+                    </Link>
                   </div>
-                  <div className="criterion filter-tag">
-                    <button onClick={() => removeCriterion()}>
-                      Criterion X
-                    </button>
-                  </div>
-                </div>
-                <div className="filter-icon">
-                  <img src="./typcn_filter.svg" alt="typcn_filter" />
-                </div>
-              </div>
-            ) : (
-              <></>
-            )}
-            <CommandList ref={suggestions} className="w-full">
-              <CommandGroup>
-                {filteredStudents.map((item, i, arr) => {
-                  const { name, matricNo, _id } = item;
-                  return (
-                    <CommandItem
-                      key={i}
-                      className={`flex justify-between bg-none font-medium py-2 text-base ${
-                        i != arr.length - 1 ? "border-b" : ""
-                      }`}
-                    >
-                      <div className="flex gap-4 text-primaryGray">
-                        <span>{matricNo}</span> <span>{name}</span>
-                      </div>{" "}
-                      <div>
-                        <Link href={`${currPage}/${_id}`} className="text-oauOrange">
-                          {linkText}
-                        </Link>
-                      </div>
-                    </CommandItem>
-                  );
-                })}
-              </CommandGroup>
-            </CommandList>
-          </>
-        </div>
+                </CommandItem>
+              );
+            })}
+          </CommandGroup>
+        </CommandList>
       )}
     </Command>
   );
