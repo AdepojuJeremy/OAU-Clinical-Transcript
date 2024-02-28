@@ -18,6 +18,7 @@ Project OAU Transcript is a pioneering free initiative aimed at enhancing access
 [] - Integrate backend
 [] - Convert to typescript
 [ ] - auto log in
+[ ] - use zod or formik or react hook form
 
 
 

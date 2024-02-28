@@ -18,12 +18,13 @@ import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { setPasswordVisible } from "@/app/GlobalRedux/slices/AppSlice";
 import { useRememberMe } from "@/hooks/useRememberMe";
+import { setCredentials,clearCredentials } from "@/app/GlobalRedux/slices/UserSlice";
 
 export default function CardWithForm() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  // Utilize the useRememberMe hook for remember me state and functions
+//custom hook
   const { rememberMe, handleRememberMeChange ,storeRememberMe,clearRememberMe} = useRememberMe();
 
   // States
@@ -43,8 +44,7 @@ export default function CardWithForm() {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const validate = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const { email, password } = formData;
 
@@ -52,22 +52,32 @@ export default function CardWithForm() {
     if (!password) return setFormErr("Please input a password.");
     if (!emailRegex.test(email)) return setFormErr("Invalid Email Address.");
 
-  rememberMe ? storeRememberMe() : clearRememberMe()
-  
+  }
 
-    const submitForm = async () => {
-      try {
-        const response = await axios.post("api/users", {
-          email,
-          password,
-        });
-        console.log(response?.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
+  const login = async () => {
+    try {
+      //todo: edit the url
+      const {data} = await axios.post(`${process.env.REACT_APP_BASE_API_URL}/auth/login`, {
+        email,
+        password,
+      },);
 
-    submitForm();
+
+      
+      console.log(data, "login successful");
+      dispatch(setCredentials(data?.token)); 
+    } catch (error) {
+      console.error(error); // Handle errors
+    }
+  };
+
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    validate();
+    rememberMe ? storeRememberMe() : clearRememberMe()
+    login();
   };
 
   return (
