@@ -1,11 +1,17 @@
 "use client";
 import { createSlice } from "@reduxjs/toolkit";
+import data from "@/_data/studentOne.js";
+import students from "@/_data/students.js"
+
 
 const appSlice = createSlice({
   name: "app",
   initialState: {
-    students: [],
+    //TODO: edit this
+    students: students ?? [],
     passwordVisible: false,
+    selectedStudentData: data ?? {}
+    
   },
   reducers: {
     setPasswordVisible: (state, {payload}) => {
@@ -13,9 +19,13 @@ const appSlice = createSlice({
     },
     setStudents: (state, {payload}) => {
       state.students = payload
+    } ,
+    setSelectedStudentData: (state, {payload}) => {
+      // state.selectedStudentData = payload
+      console.log(payload)
     } 
   },
 });
 
 export default appSlice.reducer;
-export const { setPasswordVisible, setStudents } = appSlice.actions;
+export const { setPasswordVisible, setStudents ,setSelectedStudentData} = appSlice.actions;

@@ -6,7 +6,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import {
   Card,
   CardContent,
-  CardDescription,
+
   CardFooter,
   CardHeader,
   CardTitle,
@@ -17,10 +17,24 @@ import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { setPasswordVisible } from "@/app/GlobalRedux/slices/AppSlice";
+import { useRememberMe } from "@/hooks/useRememberMe";
+import {
+  setCredentials,
+  clearCredentials,
+} from "@/app/GlobalRedux/slices/UserSlice";
+import Cookies from "js-cookie";
 
 export default function CardWithForm() {
   const dispatch = useDispatch();
   const router = useRouter();
+
+  //custom hook
+  const {
+    rememberMe,
+    handleRememberMeChange,
+    storeRememberMe,
+    clearRememberMe,
+  } = useRememberMe();
 
   // States
   const { passwordVisible } = useSelector((st) => st.app);
@@ -28,7 +42,7 @@ export default function CardWithForm() {
     email: "",
     password: "",
   });
-  const [formErr, setFormErr] = useState("");
+  const [formErr, setFormErr] = useState({});
 
   // Function
   const handleChange = (e) => {
@@ -38,28 +52,49 @@ export default function CardWithForm() {
       [name]: value,
     });
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
+
+  const validate = (formData) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const { email, password } = formData;
-    if (!email) return setFormErr("Please input an email address.");
-    if (!password) return setFormErr("Please input a password.");
-    if (!emailRegex.test(email)) return setFormErr("Invalid Email Address.");
 
-    const submitForm = async () => {
-      try {
-        const response = await axios.post("api/users", {
-          email,
-          password,
-        });
-        console.log(response?.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    submitForm();
-    // router.push("/search");
+    const errors = {};
+    if (!email) errors.email = "Please input an email address.";
+    if (!password) errors.password = "Please input a password.";
+    if (!emailRegex.test(email)) errors.email = "Invalid Email Address.";
+    setFormErr(errors);
+
   };
+
+  const login = async () => {
+    try {
+      const url = `${process.env.REACT_APP_BASE_API_URL}/api/auth/login`; // Use environment variable for secure URL storage
+      const response = await axios.post(url, formData);
+
+      console.log(response.data, "login successful");
+      Cookies.set("token", response.data?.token)
+      dispatch(setCredentials(response.data?.token));
+      router.push("/results");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+ 
+     validate(formData);
+
+    // Check for errors before proceeding with login
+    if (Object.keys(formErr).length > 0) {
+        return; 
+    }
+
+    rememberMe ? storeRememberMe() : clearRememberMe();
+    login(); 
+    };
+
+
   return (
     <Card className="max-w-[800px] min-w-[350px]">
       <CardHeader>
@@ -69,26 +104,32 @@ export default function CardWithForm() {
       </CardHeader>
       <CardContent className=" max-w-[95%] md:max-w-[90%] mx-auto">
         <form>
-          {formErr && (
-            <div className="err-message text-center text-[red] py-2">
-              {formErr}
-            </div>
-          )}
+          
           <div className="grid w-full items-center gap-8">
             <div className="flex flex-col space-y-2.5">
               <Label htmlFor="name" className="">
                 Email/Username
               </Label>
+              {formErr.email && (
+            <div className="err-message  text-[red] py-2">
+              {formErr.email}
+            </div>
+          )}
               <InputCont
                 id="email"
                 name="email"
                 onChange={handleChange}
                 placeholder="Enter your email/username"
-              ></InputCont>
+              />
             </div>
 
             <div className="flex flex-col space-y-2.5">
               <Label htmlFor="password">Password</Label>
+              {formErr.password && (
+            <div className="err-message text-center self-start text-[red] py-2">
+              {formErr.password}
+            </div>
+          )}
               <div className="flex justify-between items-center">
                 <InputCont
                   className={"justify-between items-center"}
@@ -114,8 +155,8 @@ export default function CardWithForm() {
             </div>
 
             <div className="flex justify-between">
-              <div className="flex items-center space-x-2">
-                <Checkbox id="terms" />
+              <div className="flex  space-x-2">
+                <Checkbox id="terms" onCheckedChange={handleRememberMeChange} />
                 <label
                   htmlFor="terms"
                   className="text-sm text-primaryGray font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -124,7 +165,8 @@ export default function CardWithForm() {
                 </label>
               </div>
               <span className="text-primaryBlue font-medium">
-                Forgot Password?
+                {/* //TODO: Forgot password functionality */}
+                <a href="#"> Forgot Password?</a>
               </span>
             </div>
           </div>

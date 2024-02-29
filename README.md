@@ -13,6 +13,7 @@ Project OAU Transcript is a pioneering free initiative aimed at enhancing access
 
 ## Todos
 
+<<<<<<< HEAD
 - [ ] Header responsiveness
 - [ ] Welcome page width
 - [ ] Page Loader
@@ -27,3 +28,14 @@ Project OAU Transcript is a pioneering free initiative aimed at enhancing access
 - [ ] Fix Logo on student profile header template
 - [ ] Api post request on uploading the result (file)
 - [ ] Convert to typescript
+=======
+[] - Complete styling
+[] - Data fetching
+[] - Integrate backend
+[] - Convert to typescript
+[ ] - auto log in
+[ ] - use zod or formik or react hook form
+
+
+
+>>>>>>> 6a3cfa4dc9887d3cc74707695199ed6ae90b1f48

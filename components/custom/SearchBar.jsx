@@ -3,7 +3,10 @@ import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { setStudents } from "@/app/GlobalRedux/slices/AppSlice";
+import {
+  setStudents,
+  setSelectedStudentData,
+} from "@/app/GlobalRedux/slices/AppSlice";
 import {
   Command,
   CommandDialog,
@@ -16,7 +19,7 @@ import {
   CommandShortcut,
 } from "@/components/ui/command";
 
-function SearchBar() {
+function SearchBar({ linkText, currPage }) {
   // Some nice declarations
   const dispatch = useDispatch();
 
@@ -106,7 +109,9 @@ function SearchBar() {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/students");
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_API_URL}/api/transcript/allStudents`
+        );
         dispatch(setStudents(response.data));
       } catch (err) {
         console.log(err);
@@ -141,12 +146,24 @@ function SearchBar() {
     };
   }, []);
 
+  async function handleGetTranscript(identifier) {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_API_URL}/api/transcript/my-transcript/${identifier}`
+      );
+      console.log(identifier);
+      dispatch(setSelectedStudentData(response.data));
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <Command
       ref={search}
       className={`${
         !searchOpen ? "" : "mt-[10%]"
-      } w-[40%] rounded-xl justify-between items-center px-4 `}
+      } w-[50%] rounded-xl justify-between items-center px-4 `}
     >
       <div
         className={`flex flex-row w-full justify-between items-center gap-6 ${
@@ -286,9 +303,13 @@ function SearchBar() {
                         <span>{matricNo}</span> <span>{name}</span>
                       </div>{" "}
                       <div>
-                        <Link href={`search/${_id}`} className="text-oauOrange">
-                          View Results
-                        </Link>
+                        <button
+                          onClick={() => handleGetTranscript(_id)}
+                          href={`${currPage}/${_id}`}
+                          className="text-oauOrange"
+                        >
+                          {linkText}
+                        </button>
                       </div>
                     </CommandItem>
                   );

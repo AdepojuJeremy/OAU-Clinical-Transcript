@@ -1,13 +1,9 @@
-"use client"
 import React from "react";
 import {
   Menubar,
-  MenubarContent,
   MenubarItem,
   MenubarMenu,
-  MenubarSeparator,
-  MenubarShortcut,
-  MenubarTrigger,
+  MenubarContent,
 } from "@/components/ui/menubar";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -19,6 +15,7 @@ function HomeHeader() {
   const isActive = (path) => {
     return router.pathname === path;
   };
+
   return (
     <nav className="absolute inset-x-0 flex justify-center items-center py-10 text-xl 2xl:text-[28px] z-[100]">
       <div className="w-[98%] grid grid-flow-col items-center">
@@ -31,24 +28,25 @@ function HomeHeader() {
         </div>
         <Link
           href={"/search"}
-          className="absolute flex flex-col items-center text-[32px]/[3rem] 2xl:text-[40px] text uppercase w-[40vw] text-center font-bold text-primaryBlue justify-self-center left-[50%] -translate-x-[50%] top-[50%] -translate-y-[50%]"
+          className="absolute flex flex-col items-center text-[32px]/[3rem] 2xl:text-[40px] text uppercase w-[40vw] text-center font-bold justify-self-center left-[50%] -translate-x-[50%] top-[50%] -translate-y-[50%]"
         >
           <span>OAU TRANSCRIPT</span>
           <span>RETRIEVAL PORTAL</span>
         </Link>
         <Menubar className="justify-self-end">
-          
           <MenubarMenu>
-            {navItems.map((item, i) => {
-              return <MenubarTrigger key={i}>{item}</MenubarTrigger>;
-            })}
+            <MenubarContent>
+              {navItems.map((item, i) => {
+                const path = `/${item.toLowerCase()}`;
+                return (
+                  <MenubarItem key={i} className={isActive(path) ? "active" : ""}>
+                    <Link href={path}>{item}</Link>
+                  </MenubarItem>
+                );
+              })}
+            </MenubarContent>
           </MenubarMenu>
         </Menubar>
-        {/* <ul className="navitems flex gap-4 text-primaryBlue font-bold">
-          <li>About</li>
-          <span className="text-oauOrange">/</span>
-          <li>Contact</li>
-        </ul> */}
       </div>
     </nav>
   );
