@@ -21,7 +21,8 @@ const appSlice = createSlice({
       state.students = payload
     } ,
     setSelectedStudentData: (state, {payload}) => {
-      state.selectedStudentData = payload
+      // state.selectedStudentData = payload
+      console.log(payload)
     } 
   },
 });

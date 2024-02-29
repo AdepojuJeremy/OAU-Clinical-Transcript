@@ -1,4 +1,4 @@
-'use client'
+
 import HomeHeader from "@/components/custom/HomeHeader";
 import SearchBar from "@/components/custom/SearchBar";
 

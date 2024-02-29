@@ -45,18 +45,39 @@ const TableSection = ({ level, levelName }) => {
   const { selectedStudentData: data } = useSelector((st) => st.app);
   const dispatch = useDispatch()
 
-  const handleCellSave = async (index,value) => {
-
-    const updatedLevel = level.map((course, i) =>
-    i === index ? { ...course, courseScore: value } : course
-  );
-
-
-  // Dispatch the action to update selectedStudentData in Redux store
+  const handleCellSave = async (index, value) => {
+    const updatedDetails = data.details.map((levelDetails) => {
+      const updatedLevel = Object.entries(levelDetails).reduce(
+        (acc, [level, courses]) => {
+          if (courses.some((course, i) => i === index)) {
+            // Update the course score for the specific index
+            const updatedCourses = courses.map((course, i) =>
+              i === index ? { ...course, courseScore: value } : course
+            );
+            // Ensure the courses are sorted alphabetically by course title
+            updatedCourses.sort((a, b) =>
+              a.courseTitle.localeCompare(b.courseTitle)
+            );
+            // Update the level in the details
+            acc[level] = updatedCourses;
+          } else {
+            // Maintain other levels without changes
+            acc[level] = courses;
+          }
+          return acc;
+        },
+        {}
+      );
+      return updatedLevel;
+    });
   
-  dispatch(setSelectedStudentData({ ...data, details: [{ [levelName]: updatedLevel }] }));
-
+    // Combine the updated details with the rest of the data
+    const updatedData = { ...data, details: updatedDetails };
+  
+    // Dispatch the action to update selectedStudentData in Redux store
+    dispatch(setSelectedStudentData(updatedData));
   };
+  
   return (
     <Table>
       <TableHeader className="border-primaryGray">
