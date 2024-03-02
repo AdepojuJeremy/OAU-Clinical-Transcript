@@ -6,7 +6,6 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import {
   Card,
   CardContent,
-
   CardFooter,
   CardHeader,
   CardTitle,
@@ -14,10 +13,10 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import InputCont from "@/components/ui/InputCont";
 import { Label } from "@/components/ui/label";
-import { useRouter } from "next/navigation";
-import { useDispatch, useSelector } from "react-redux";
 import { setPasswordVisible } from "@/app/GlobalRedux/slices/AppSlice";
 import { useRememberMe } from "@/hooks/useRememberMe";
+import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setCredentials,
   clearCredentials,
@@ -62,7 +61,6 @@ export default function CardWithForm() {
     if (!password) errors.password = "Please input a password.";
     if (!emailRegex.test(email)) errors.email = "Invalid Email Address.";
     setFormErr(errors);
-
   };
 
   const login = async () => {
@@ -71,7 +69,7 @@ export default function CardWithForm() {
       const response = await axios.post(url, formData);
 
       console.log(response.data, "login successful");
-      Cookies.set("token", response.data?.token)
+      Cookies.set("token", response.data?.token);
       dispatch(setCredentials(response.data?.token));
       router.push("/results");
     } catch (error) {
@@ -82,18 +80,16 @@ export default function CardWithForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
- 
-     validate(formData);
+    validate(formData);
 
     // Check for errors before proceeding with login
     if (Object.keys(formErr).length > 0) {
-        return; 
+      return;
     }
 
     rememberMe ? storeRememberMe() : clearRememberMe();
-    login(); 
-    };
-
+    login();
+  };
 
   return (
     <Card className="max-w-[800px] min-w-[350px]">
@@ -104,17 +100,16 @@ export default function CardWithForm() {
       </CardHeader>
       <CardContent className=" max-w-[95%] md:max-w-[90%] mx-auto">
         <form>
-          
           <div className="grid w-full items-center gap-8">
             <div className="flex flex-col space-y-2.5">
               <Label htmlFor="name" className="">
                 Email/Username
               </Label>
               {formErr.email && (
-            <div className="err-message  text-[red] py-2">
-              {formErr.email}
-            </div>
-          )}
+                <div className="err-message  text-[red] py-2">
+                  {formErr.email}
+                </div>
+              )}
               <InputCont
                 id="email"
                 name="email"
@@ -126,10 +121,10 @@ export default function CardWithForm() {
             <div className="flex flex-col space-y-2.5">
               <Label htmlFor="password">Password</Label>
               {formErr.password && (
-            <div className="err-message text-center self-start text-[red] py-2">
-              {formErr.password}
-            </div>
-          )}
+                <div className="err-message text-center self-start text-[red] py-2">
+                  {formErr.password}
+                </div>
+              )}
               <div className="flex justify-between items-center">
                 <InputCont
                   className={"justify-between items-center"}

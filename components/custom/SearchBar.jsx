@@ -1,12 +1,13 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setStudents,
   setSelectedStudentData,
 } from "@/app/GlobalRedux/slices/AppSlice";
+import { token } from "@/app/GlobalRedux/slices/UserSlice";
 import {
   Command,
   CommandDialog,
@@ -22,6 +23,7 @@ import {
 function SearchBar({ linkText, currPage }) {
   // Some nice declarations
   const dispatch = useDispatch();
+  const router = useRouter();
 
   // States
   const { students } = useSelector((st) => st.app);
@@ -110,7 +112,12 @@ function SearchBar({ linkText, currPage }) {
     const fetchStudents = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BASE_API_URL}/api/transcript/allStudents`
+          `${process.env.REACT_APP_BASE_API_URL}/api/transcript/allStudents`,
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
         );
         dispatch(setStudents(response.data));
       } catch (err) {
@@ -149,10 +156,16 @@ function SearchBar({ linkText, currPage }) {
   async function handleGetTranscript(identifier) {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_BASE_API_URL}/api/transcript/my-transcript/${identifier}`
+        `${process.env.REACT_APP_BASE_API_URL}/api/transcript/my-transcript/${identifier}`,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
       );
       console.log(identifier);
       dispatch(setSelectedStudentData(response.data));
+      router.push(`${currPage}/${identifier}`);
     } catch (err) {
       console.log(err);
     }
@@ -305,7 +318,6 @@ function SearchBar({ linkText, currPage }) {
                       <div>
                         <button
                           onClick={() => handleGetTranscript(_id)}
-                          href={`${currPage}/${_id}`}
                           className="text-oauOrange"
                         >
                           {linkText}

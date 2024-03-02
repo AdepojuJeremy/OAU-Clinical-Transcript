@@ -1,21 +1,26 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import StudentProfileLayout from "@/components/custom/StudentProfileLayout";
 import { Button } from "@/components/ui/button";
 import EditableTable from "@/components/custom/EditableTable";
-import { uploadResults } from "your-redux-actions-path"; // Update with your actual path
+import axios from "axios";
+import { token } from "@/app/GlobalRedux/slices/UserSlice";
 
 export default function UploadPage() {
   const dispatch = useDispatch();
   const { selectedStudentData: data } = useSelector((st) => st.app);
 
-  const handleUploadResults = async (identifier, data) => {
+  const handleUploadResults = async () => {
     try {
       console.log("Starting upload...");
 
       const response = await axios.post(
-        `${process.env.REACT_APP_BASE_API_URL}/api/transcript/my-transcript/${identifier}`,
-        data
+        `${process.env.REACT_APP_BASE_API_URL}/api/transcript/my-transcript/${data._id}`,
+        data,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
       );
 
       console.log("Upload successful:", response.data);
@@ -23,8 +28,6 @@ export default function UploadPage() {
       return response.data;
     } catch (error) {
       console.error("Error uploading results:", error);
-      // Optionally handle the error, display a user-friendly message, or throw it again
-      throw error;
     }
   };
 
