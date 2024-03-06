@@ -154,17 +154,17 @@ function SearchBar({ linkText, currPage }) {
 
   async function handleGetTranscript(identifier) {
     try {
-         
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/transcript/my-transcript/${identifier}`,
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
-      console.log(identifier);
-      dispatch(setSelectedStudentData(response.data));
+         //TODO: Uncomment out this
+      // const response = await axios.get(
+      //   `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/transcript/my-transcript/${identifier}`,
+      //   {
+      //     headers: {
+      //       Authorization: "Bearer " + token,
+      //     },
+      //   }
+      // );
+      // console.log(identifier);
+      // dispatch(setSelectedStudentData(response.data));
       router.push(`${currPage}/${identifier}`);
     } catch (err) {
       console.log(err);

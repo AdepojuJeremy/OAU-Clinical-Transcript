@@ -24,7 +24,7 @@ function HomeHeader() {
       <div className="w-[98%] grid grid-flow-col items-center">
         <div className="logo flex-1">
           <img
-            src="./oaulogo.png"
+            src="/oaulogo.png"
             className="w-[100px] 2xl:w-[116px]"
             alt="oaulogo"
           />

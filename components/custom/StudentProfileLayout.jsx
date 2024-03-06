@@ -1,4 +1,4 @@
-
+"use client"
 import HomeHeader from "@/components/custom/HomeHeader";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useSelector } from "react-redux";
