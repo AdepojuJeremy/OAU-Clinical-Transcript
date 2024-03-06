@@ -3,18 +3,18 @@ import StudentProfileLayout from "@/components/custom/StudentProfileLayout";
 import { Button } from "@/components/ui/button";
 import EditableTable from "@/components/custom/EditableTable";
 import axios from "axios";
-import { token } from "@/app/GlobalRedux/slices/UserSlice";
 
 export default function UploadPage() {
   const dispatch = useDispatch();
   const { selectedStudentData: data } = useSelector((st) => st.app);
+  const { token } = useSelector((st) => st.user);
 
   const handleUploadResults = async () => {
     try {
       console.log("Starting upload...");
 
       const response = await axios.post(
-        `${process.env.REACT_APP_BASE_API_URL}/api/transcript/my-transcript/${data._id}`,
+        `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/transcript/my-transcript/${data._id}`,
         data,
         {
           headers: {

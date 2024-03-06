@@ -18,10 +18,13 @@ const userSlice = createSlice({
       state.isLoggedIn = false;
       state.token = null;
     },
+    restoreToken(state, {payload}) {
+      state.token = payload
+    }
   },
 });
 
 export default userSlice.reducer;
 
-export const { setCredentials, clearCredentials, isLoggedIn, token } =
+export const { setCredentials, clearCredentials, restoreToken } =
   userSlice.actions;

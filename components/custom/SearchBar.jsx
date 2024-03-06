@@ -7,17 +7,14 @@ import {
   setStudents,
   setSelectedStudentData,
 } from "@/app/GlobalRedux/slices/AppSlice";
-import { token } from "@/app/GlobalRedux/slices/UserSlice";
 import {
   Command,
-  CommandDialog,
-  CommandEmpty,
+
   CommandGroup,
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
-  CommandShortcut,
+
 } from "@/components/ui/command";
 
 function SearchBar({ linkText, currPage }) {
@@ -26,7 +23,9 @@ function SearchBar({ linkText, currPage }) {
   const router = useRouter();
 
   // States
+
   const { students } = useSelector((st) => st.app);
+  const { token } = useSelector((st) => st.user);
   const [searchOpen, setSearchOpen] = useState(false);
   const [filterOpen, setFilterOpen] = useState(false);
   const [admissionDropOpen, setAdmissionDropOpen] = useState(false);
@@ -112,7 +111,7 @@ function SearchBar({ linkText, currPage }) {
     const fetchStudents = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BASE_API_URL}/api/transcript/allStudents`,
+          `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/transcript/allStudents`,
           {
             headers: {
               Authorization: "Bearer " + token,
@@ -155,8 +154,9 @@ function SearchBar({ linkText, currPage }) {
 
   async function handleGetTranscript(identifier) {
     try {
+         
       const response = await axios.get(
-        `${process.env.REACT_APP_BASE_API_URL}/api/transcript/my-transcript/${identifier}`,
+        `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/transcript/my-transcript/${identifier}`,
         {
           headers: {
             Authorization: "Bearer " + token,

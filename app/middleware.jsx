@@ -1,19 +1,21 @@
-import { NextResponse } from 'next/server';
+//TODO: Create functionality of protected routes
 
-export function middleware() {
-  // Retrieve the token from cookies
-  const token = req.cookies.get('token');
-  console.log(token);
+// import { NextResponse } from 'next/server';
 
-  // Exclude login and root route from protection
-  const excludedRoutes = ['/login', '/'];
-  const currentRoute = new URL(req.url);
+// export function middleware() {
+//   // Retrieve the token from cookies
+//   const token = req.cookies.get('token');
+//   console.log(token);
 
-  // Redirect unauthenticated users except for excluded routes
-  if (!token && !excludedRoutes.includes(currentRoute.pathname)) {
-    return NextResponse.redirect(new URL('/login', req.url));
-  }
+//   // Exclude login and root route from protection
+//   const excludedRoutes = ['/login', '/'];
+//   const currentRoute = new URL(req.url);
 
-  // Allow access for authenticated users or login/root route
-  return NextResponse.next();
-}
+//   // Redirect unauthenticated users except for excluded routes
+//   if (!token && !excludedRoutes.includes(currentRoute.pathname)) {
+//     return NextResponse.redirect(new URL('/login', req.url));
+//   }
+
+//   // Allow access for authenticated users or login/root route
+//   return NextResponse.next();
+// }
