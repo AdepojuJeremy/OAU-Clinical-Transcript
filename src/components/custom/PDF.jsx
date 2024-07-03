@@ -1,34 +1,45 @@
-"use client"
-import {Document,Page,View,Text,Image,PDFViewer,StyleSheet,Font} from "@react-pdf/renderer"
-import { useEffect, useState } from "react"
+import React from "react";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+import { convertToDigit } from "@/lib/convertToDigit";
 
-function PDF(){
-    return(
-        <Document>
-            <Page>
-                <View>
-                    <Text>Hello world</Text>
-                </View>
-            </Page>
-        </Document>
-    )
-}
+export const generateTranscript = (studentData) => {
+    const doc = new jsPDF();
+    console.log(studentData)
 
-export default function PDFView(){
-    const [client,setClient] = useState();
+    // Add institution details
+    doc.setFontSize(18);
+    doc.text("Obafemi Awolowo University", 14, 22);
+    doc.setFontSize(12);
+    doc.text("Ile-Ife, Osun state", 14, 30);
+    doc.text("Phone: (123) 456-7890 | Email: info@xyzuniversity.edu", 14, 36);
+    doc.text("Academic Transcript", 14, 50);
 
-    useEffect(()=> {
-setClient(true);
+    // Add student details
+    doc.text(`Name: ${studentData.name}`, 14, 60);
+    doc.text(`Matric Number: ${studentData.matricNO}`, 14, 66);
+    // doc.text(`Date of Birth: ${studentData.dob}`, 14, 72);
+    doc.text(`Program: Medicine and Surgery`, 14, 78);
+    // doc.text(`Enrollment Dates: ${studentData.enrollmentDates}`, 14, 84);
 
-    },[]);
+    // Add academic record table
+    doc.autoTable({
+      startY: 90,
+      head: [["Class", "Course Title", "Score", "Grade"]],
+      body: studentData.academicRecord.map((record) => [
+        record.term,
+        record.courseCode,
+        record.courseTitle,
+        record.credits,
+        record.grade,
+      ]),
+    });
 
-    return(
-        <PDFViewer>
-            <PDF />
-        </PDFViewer>
+    // Add GPA
+    // doc.text(`Cumulative GPA: ${studentData.cumulativeGPA}`, 14, doc.lastAutoTable.finalY + 10);
 
-)
+    // Save PDF
+    doc.save("transcript.pdf");
 
-}
-
-
+    console.log("called")
+  };

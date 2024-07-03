@@ -1,12 +1,12 @@
 import { useState } from "react";
 import "./App.css";
-import Upload from "./components/Upload";
-import Test from "./components/Test";
-import Results from "./components/Results";
-import Login from "./components/Login";
-import Welcome from "./components/Welcome";
-import UploadIndividual from "./components/UploadIndividual";
-import ResultsPage from "./components/ResultsPage";
+import Upload from "./pages/Upload";
+import Test from "./pages/Test";
+import Results from "./pages/Results";
+import Login from "./pages/Login";
+import Welcome from "./pages/Welcome";
+import UploadIndividual from "./pages/UploadIndividual";
+import ResultsPage from "./pages/ResultsPage";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 

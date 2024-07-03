@@ -14,7 +14,7 @@ import { Checkbox } from "../ui/checkbox";
 import InputCont from "../ui/InputCont";
 import { Label } from "../ui/label";
 import { setPasswordVisible } from "../../Global/slices/AppSlice";
-import {useRememberMe} from '../../hooks/useRememberMe'
+import { useRememberMe } from "../../hooks/useRememberMe";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -27,7 +27,7 @@ export default function CardWithForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  //custom hook
+  // Custom hook
   const {
     rememberMe,
     handleRememberMeChange,
@@ -59,18 +59,20 @@ export default function CardWithForm() {
     const errors = {};
     if (!email) errors.email = "Please input an email address.";
     if (!password) errors.password = "Please input a password.";
-    if (!emailRegex.test(email)) errors.email = "Invalid Email Address.";
-    setFormErr(errors);
+    if (email && !emailRegex.test(email)) errors.email = "Invalid Email Address.";
+
+    return errors;
   };
 
   const login = async () => {
     try {
-      const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/auth/login`; // Use environment variable for secure URL storage
-      const response = await axios.post(url, formData);
+      // const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/auth/login`; // Use environment variable for secure URL storage
+      // const response = await axios.post(url, formData);
 
-      console.log(response.data, "login successful");
-      Cookies.set("token", response.data?.token);
-      dispatch(setCredentials(response.data?.token));
+      // console.log(response.data, "login successful");
+      // Cookies.set("token", response.data?.token);
+      // dispatch(setCredentials(response.data?.token));
+      console.log("Login successful");
       navigate("/results");
     } catch (error) {
       console.error(error);
@@ -80,11 +82,15 @@ export default function CardWithForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    validate(formData);
+    // Local variable to store errors
+    const errors = validate(formData);
 
-    // Check for errors before proceeding with login
-    if (Object.keys(formErr).length > 0) {
-      return;
+    // Set state errors
+    setFormErr(errors);
+
+    // Check if there are errors before proceeding with login
+    if (Object.keys(errors).length > 0) {
+      return; // Exit early if there are validation errors
     }
 
     rememberMe ? storeRememberMe() : clearRememberMe();

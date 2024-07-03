@@ -1,3 +1,17 @@
+export const downloadData = {
+  name: "John Doe",
+  id: "123456789",
+  dob: "January 1, 2000",
+  program: "Bachelor of Science in Computer Science",
+  enrollmentDates: "August 2018 - May 2022",
+  academicRecord: [
+    { term: "Fall 2018", courseCode: "CS101", courseTitle: "Introduction to Programming", credits: 3, grade: "A" },
+    { term: "Fall 2018", courseCode: "MATH101", courseTitle: "Calculus I", credits: 4, grade: "B+" },
+    // Add more courses here
+  ],
+  cumulativeGPA: "3.58",
+};
+
 const data  = {
   "_id": "65bd5453149572fe3b0a3748",
   "name": "John Doe",
@@ -7,19 +21,19 @@ const data  = {
       "twoHundredLevel": [
         {
           "courseTitle": "Anatomy",
-          "courseScore": 90,
+          "courseScore": 30,
           "courseGrade": "Distinction",
           "_id": "65bd5453149572fe3b0a374a"
         },
         {
           "courseTitle": "Physiology",
-          "courseScore": 90,
+          "courseScore": 30,
           "courseGrade": "Distinction",
           "_id": "65bd5453149572fe3b0a374b"
         },
         {
           "courseTitle": "Biochemistry",
-          "courseScore": 60,
+          "courseScore": 30,
           "courseGrade": "Pass",
           "_id": "65bd5453149572fe3b0a374c"
         }

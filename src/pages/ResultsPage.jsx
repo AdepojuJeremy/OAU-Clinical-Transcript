@@ -1,8 +1,10 @@
 "use client";
 import { useRef } from "react";
-import ResultsTable from "./custom/ResultsTable";
-import Student from "./custom/StudentProfileLayout";
-import { Button } from "./ui/button";
+import ResultsTable from "../components/custom/ResultsTable";
+import Student from "../components/custom/StudentProfileLayout";
+import { Button } from "../components/ui/button";
+import {  generateTranscript } from "@/components/custom/PDF";
+import { downloadData } from "@/_data/studentOne";
 
 // import html2pdf from "html2pdf.js";
 
@@ -12,17 +14,8 @@ export default function ResultsPage({ params }) {
   const handleGenerateTranscript = () => {
     // Ensure that the resultsTableRef has a current value
     console.log("Handle generate transcript page.");
-    // if (resultsTableRef.current) {
-    //   const pdfOptions = {
-    //     margin: 10,
-    //     filename: "transcript.pdf",
-    //     image: { type: "jpeg", quality: 0.98 },
-    //     html2canvas: { scale: 2 },
-    //     jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-    //   };
-
-    //   html2pdf(resultsTableRef.current, pdfOptions);
-    // }
+    console.log(downloadData)
+    generateTranscript(downloadData)
   };
 
   return (
