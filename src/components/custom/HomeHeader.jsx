@@ -27,7 +27,7 @@ function HomeHeader() {
         </div>
         <Link
           to={"/search"}
-          className="absolute flex flex-col items-center text-[32px]/[3rem] 2xl:text-[40px] text uppercase w-[40vw] text-center font-bold text-primaryBlue justify-self-center left-[50%] -translate-x-[50%] top-[50%] -translate-y-[50%]"
+          className="h2 absolute flex flex-col items-center text uppercase w-[40vw] text-center font-bold justify-self-center left-[50%] -translate-x-[50%] top-[50%] -translate-y-[50%]"
         >
           <span>OAU TRANSCRIPT</span>
           <span>RETRIEVAL PORTAL</span>

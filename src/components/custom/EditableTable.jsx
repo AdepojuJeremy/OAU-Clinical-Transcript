@@ -67,26 +67,53 @@ const TableSection = ({ level, levelName }) => {
     <Table>
       <TableHeader className="border-primaryGray">
         <TableRow className=" bg-placeholder text-black" isHeaderRow={true}>
-          {level.map((course, index) => (
+          <TableHead className="capitalize text-black font-bold text-center">
+            Anatomy
+          </TableHead>
+          <TableHead className="capitalize text-black font-bold text-center">
+            Biochemistry
+          </TableHead>
+          <TableHead className="capitalize text-black font-bold text-center">
+            Physiology
+          </TableHead>
+          {/* {level.map((course, index) => (
             <TableHead
               key={index}
               className="capitalize text-black font-bold text-center"
             >
               {course.courseTitle}
             </TableHead>
-          ))}
+          ))} */}
         </TableRow>
       </TableHeader>
       <TableBody className="border-primaryGray">
         <TableRow key={1}>
-          {level.map((course, index) => (
+          <EditableCell
+            placeholder="90"
+            value="40"
+            onSave={() => {}}
+            className="border-r border-primaryGray text-black font-bold text-center"
+          />
+          <EditableCell
+            placeholder="90"
+            value="40"
+            onSave={() => {}}
+            className="border-r border-primaryGray text-black font-bold text-center"
+          />
+          <EditableCell
+            placeholder="90"
+            value="40"
+            onSave={() => {}}
+            className="border-r border-primaryGray text-black font-bold text-center"
+          />
+          {/* {level.map((course, index) => (
             <EditableCell
               key={index}
               value={course.courseScore}
               onSave={(value) => handleCellSave(index, value)}
               className="border-r border-primaryGray text-black font-bold text-center"
             />
-          ))}
+          ))} */}
         </TableRow>
       </TableBody>
     </Table>

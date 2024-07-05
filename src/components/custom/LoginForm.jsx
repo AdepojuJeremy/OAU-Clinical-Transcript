@@ -71,7 +71,7 @@ export default function CardWithForm() {
       console.log(response.data, "login successful");
       Cookies.set("token", response.data?.token);
       dispatch(setCredentials(response.data?.token));
-      navigate("/results");
+      navigate("/upload");
     } catch (error) {
       console.error(error);
     }

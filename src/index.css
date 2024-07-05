@@ -102,3 +102,10 @@ body {
   background-position: center;
   background-size: cover;
 }
+
+.h2 {
+  @apply text-[32px]/[3rem] 2xl:text-[40px] text-primaryBlue;
+}
+.h3 {
+  @apply text-[28px] text-primaryBlue;
+}
