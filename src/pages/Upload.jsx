@@ -1,5 +1,5 @@
-import HomeHeader from "./custom/HomeHeader";
-import SearchBar from "./custom/SearchBar";
+import HomeHeader from "@/components/custom/HomeHeader";
+import SearchBar from "@/components/custom/SearchBar";
 import { useNavigate } from "react-router-dom";
 
 export default function Upload() {
