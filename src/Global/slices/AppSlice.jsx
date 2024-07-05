@@ -10,7 +10,8 @@ const appSlice = createSlice({
     //TODO: edit this
     students: students ,
     passwordVisible: false,
-    selectedStudentData: data 
+    selectedStudentData: data,
+    currentStudentClass: 1
     
   },
   reducers: {
@@ -19,11 +20,16 @@ const appSlice = createSlice({
     },
     setStudents: (state, {payload}) => {
       state.students = payload
-    } ,
+    },
     setSelectedStudentData: (state, {payload}) => {
       // state.selectedStudentData = payload
       console.log(payload)
-    } 
+    },
+    updateClassInfo: (state, {payload}) => {
+      if(state.currentStudentClass === 1) {
+
+      }
+    }
   },
 });
 

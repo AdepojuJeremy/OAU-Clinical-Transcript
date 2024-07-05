@@ -5,6 +5,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  TableCell,
 } from "../ui/table";
 import { FaPlus } from "react-icons/fa";
 import { Card, CardContent } from "../ui/card";
@@ -43,38 +44,56 @@ const EditableCell = ({ value, onSave, className }) => {
 
 const TableSection = ({ level, levelName }) => {
   const { selectedStudentData: data } = useSelector((st) => st.app);
-  const dispatch = useDispatch();
-  const classes = Object.keys(data.details[0]).slice(0, -2);
-  const allClasses = Object.entries(data.details[0]);
+  // const dispatch = useDispatch();
+  // const classes = Object.keys(data.details[0]).slice(0, -2);
+  // const allClasses = Object.entries(data.details[0]);
 
-  function handleCellSave(index, value) {
-    const updatedClass = data.details[0][levelName].map((x, i) =>
-      i === index ? { ...x, courseScore: value } : x
-    );
-    const newData = allClasses.map((x) =>
-      x[0] === levelName ? [levelName, updatedClass] : x
-    );
+  // function handleCellSave(index, value) {
+  //   const updatedClass = data.details[0][levelName].map((x, i) =>
+  //     i === index ? { ...x, courseScore: value } : x
+  //   );
+  //   const newData = allClasses.map((x) =>
+  //     x[0] === levelName ? [levelName, updatedClass] : x
+  //   );
 
-    const joinedData = newData.reduce((acc, [a, b]) => {
-      acc[a] = b;
-      return acc;
-    }, {});
-    const editedData = data.details.map((x) => joinedData);
-    dispatch(setSelectedStudentData(editedData));
-  }
+  //   const joinedData = newData.reduce((acc, [a, b]) => {
+  //     acc[a] = b;
+  //     return acc;
+  //   }, {});
+  //   const editedData = data.details.map((x) => joinedData);
+  //   dispatch(setSelectedStudentData(editedData));
+  // }
 
   return (
     <Table>
       <TableHeader className="border-primaryGray">
         <TableRow className=" bg-placeholder text-black" isHeaderRow={true}>
           <TableHead className="capitalize text-black font-bold text-center">
-            Anatomy
+            <input
+              type="text"
+              name=""
+              id=""
+              className="border-solid border-[1px] border-gray-200 rounded-sm text-center bg-transparent placeholder:text-[black]/80"
+              placeholder="Anatomy"
+            />
           </TableHead>
           <TableHead className="capitalize text-black font-bold text-center">
-            Biochemistry
+            <input
+              type="text"
+              name=""
+              id=""
+              className="border-solid border-[1px] border-gray-200 rounded-sm text-center bg-transparent placeholder:text-[black]/80"
+              placeholder="Biochemistry"
+            />
           </TableHead>
           <TableHead className="capitalize text-black font-bold text-center">
-            Physiology
+            <input
+              type="text"
+              name=""
+              id=""
+              className="border-solid border-[1px] border-gray-200 rounded-sm text-center bg-transparent placeholder:text-[black]/80"
+              placeholder="Physiology"
+            />
           </TableHead>
           {/* {level.map((course, index) => (
             <TableHead
@@ -88,9 +107,33 @@ const TableSection = ({ level, levelName }) => {
       </TableHeader>
       <TableBody className="border-primaryGray">
         <TableRow key={1}>
-         <input type="text" className="border-[red] bg-[red] ml-4" />
-         <input type="text" className="border-[red] bg-[red] ml-4" />
-         <input type="text" className="border-[red] bg-[red] ml-4" />
+          <TableCell className="text-center ">
+            <input
+              type="text"
+              name=""
+              id=""
+              className="border-solid border-[1px] border-gray-200 rounded-sm text-center"
+              placeholder="70"
+            />
+          </TableCell>
+          <TableCell className="text-center ">
+            <input
+              type="text"
+              name=""
+              id=""
+              className="border-solid border-[1px] border-gray-200 rounded-sm text-center"
+              placeholder="80"
+            />
+          </TableCell>
+          <TableCell className="text-center ">
+            <input
+              type="text"
+              name=""
+              id=""
+              className="border-solid border-[1px] border-gray-200 rounded-sm text-center"
+              placeholder="90"
+            />
+          </TableCell>
           {/* {level.map((course, index) => (
             <EditableCell
               key={index}
@@ -106,34 +149,32 @@ const TableSection = ({ level, levelName }) => {
 };
 
 const UploadTable = () => {
-  const { selectedStudentData: data } = useSelector((st) => st.app);
-  const classes = Object.keys(data.details[0]).slice(0, -2);
+  const { currentStudentClass } = useSelector((st) => st.app);
+  // const classes = Object.keys(data.details[0]).slice(0, -2);
 
   return (
     <Card className="mb-5">
       <CardContent className="pt-8">
-        {classes.map((level, index) => {
-          const levelArr = data.details[0][level];
-          return (
-            <div key={index} className=" flex flex-col gap-5 mb-10">
-              <div className="border-primaryGray border rounded ">
-                <div className="h-[40px] w-full grid items-center px-2">
-                  <div className="border-r font-bold border-primaryGray grid items-center h-full w-[fit-content] ">
-                    <span className="mr-5">
-                      {" "}
-                      {`${index + 2}00L 19/20 Session`}
-                    </span>
-                  </div>
-                </div>
-
-                <TableSection level={levelArr} levelName={level} />
+        <div className=" flex flex-col gap-5 mb-10">
+          <div className="border-primaryGray border rounded ">
+            <div className="h-[40px] w-full grid items-center px-2">
+              <div className="border-r font-bold border-primaryGray grid items-center h-full w-[fit-content] ">
+                <span className="mr-5">
+                  {" "}
+                  {`${currentStudentClass}00L 19/20 Session`}
+                </span>
               </div>
             </div>
-          );
-        })}
-        <div className="flex justify-center items-center cursor-pointer">
-          <FaPlus className="text-xl mr-2" />
-          <span>Add New Table</span>
+
+            <TableSection />
+          </div>
+        </div>
+
+        <div className="flex justify-center items-center ">
+          <button type={"button"} className="flex items-center">
+            <FaPlus className="text-xl mr-2" />
+            <span>Add New Year</span>
+          </button>
         </div>
       </CardContent>
     </Card>
