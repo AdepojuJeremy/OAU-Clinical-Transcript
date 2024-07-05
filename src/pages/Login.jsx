@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import HeaderOne from './custom/HeaderOne'
-import CardWithForm from './custom/LoginForm' 
+import HeaderOne from '../components/custom/HeaderOne'
+import CardWithForm from '../components/custom/LoginForm' 
 
 function Login() {
   return (
@@ -15,12 +15,7 @@ function Login() {
         <CardWithForm />
       </div>
 
-      <p className="font-crimson font-bold text-lg pt-8 ">
-        Forgot Password?{" "}
-        <Link href="#" className="text-oauOrange pl-4">
-          reset
-        </Link>
-      </p>
+     
     </main>
   </div>
   )

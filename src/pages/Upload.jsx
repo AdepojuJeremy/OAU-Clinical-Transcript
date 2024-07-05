@@ -10,7 +10,7 @@ export default function Upload() {
   };
   return (
     <div className="Home gradient-bg">
-      <HomeHeader />
+    <HomeHeader />
       <main className="main min-h-screen w-screen flex justify-center items-center">
         <div className="">
           <div className="h3">Upload Student Information</div>

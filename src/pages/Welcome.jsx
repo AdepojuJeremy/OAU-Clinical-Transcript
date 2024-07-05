@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import HeaderOne from "./custom/HeaderOne";
+import HeaderOne from "../components/custom/HeaderOne";
 
 function Welcome() {
   return (

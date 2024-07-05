@@ -8,9 +8,9 @@ const appSlice = createSlice({
   name: "app",
   initialState: {
     //TODO: edit this
-    students: students ?? [],
+    students: students ,
     passwordVisible: false,
-    selectedStudentData: data ?? {}
+    selectedStudentData: data 
     
   },
   reducers: {

@@ -88,24 +88,9 @@ const TableSection = ({ level, levelName }) => {
       </TableHeader>
       <TableBody className="border-primaryGray">
         <TableRow key={1}>
-          <EditableCell
-            placeholder="90"
-            value="40"
-            onSave={() => {}}
-            className="border-r border-primaryGray text-black font-bold text-center"
-          />
-          <EditableCell
-            placeholder="90"
-            value="40"
-            onSave={() => {}}
-            className="border-r border-primaryGray text-black font-bold text-center"
-          />
-          <EditableCell
-            placeholder="90"
-            value="40"
-            onSave={() => {}}
-            className="border-r border-primaryGray text-black font-bold text-center"
-          />
+         <input type="text" className="border-[red] bg-[red] ml-4" />
+         <input type="text" className="border-[red] bg-[red] ml-4" />
+         <input type="text" className="border-[red] bg-[red] ml-4" />
           {/* {level.map((course, index) => (
             <EditableCell
               key={index}

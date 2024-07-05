@@ -1,13 +1,20 @@
-"use client"
+"use client";
 
 import React from "react";
 import { Card, CardContent } from "../ui/card";
-import { Table,TableBody,TableCell,TableHead,TableHeader,TableRow } from "../ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../ui/table";
+import { convertToDigit } from "@/lib/convertToDigit";
 import { Button } from "../ui/button";
 import { useSelector } from "react-redux";
 
-
-function grade(courses) {
+function promotionStatus(courses) {
   let below50Count = 0;
 
   for (let i = 0; i < courses.length; i++) {
@@ -18,55 +25,52 @@ function grade(courses) {
     }
   }
   if (below50Count === 0) {
-    return "Pass";
+    return "pass";
   } else if (below50Count === 1) {
-    return "Resit";
+    return "resit";
   } else if (below50Count === 2) {
-    return "Repeat";
+    return "repeat";
   } else {
-    return "Withdraw";
+    return "withdraw";
   }
 }
 
 const ResultsTable = () => {
-
-  const { selectedStudentData:data } = useSelector((st) => st.app);
+  const { selectedStudentData: data } = useSelector((st) => st.app);
   const classes = Object.keys(data.details[0]);
 
-
-
   return (
-   
-      <Card className="mb-5">
-        <CardContent className="pt-8">
-          
-        {classes.slice(0,-2).map((level, index) => {
-          const levelArr = data.details[0][level]
-          const variantName =  grade(levelArr);
-return (
-  <div key={index} className=" flex flex-col gap-5 mb-10">
+    <Card className="mb-5">
+      <CardContent className="pt-8">
+        {classes.slice(0, -2).map((level, index) => {
+          const levelArr = data.details[0][level];
+          const variantName = promotionStatus(levelArr);
+          return (
+            <div key={index} className=" flex flex-col gap-5 mb-10">
               <div className="border-primaryGray border rounded ">
                 <div className="h-[40px] w-full grid items-center px-2">
                   <div className="border-r font-bold border-primaryGray grid items-center h-full w-[fit-content] ">
-                   <span className="mr-5"> {`${index + 2}00L 19/20 Session`}</span>
+                    <span className="mr-5">
+                      {" "}
+                      {`${convertToDigit(level)}L 19/20 Session`}
+                    </span>
                   </div>
                 </div>
-    
+
                 <TableSection level={levelArr} />
               </div>
 
               {/* // TODO: Fix button style */}
-       
-              <Button className="self-end " variant= {`variantName`}>
-                {variantName}
-              </Button> 
-            </div>
-)
-        })}
-        </CardContent>
-      </Card>
-    );
 
+              <Button className="self-end  " variant={variantName}>
+                {variantName}
+              </Button>
+            </div>
+          );
+        })}
+      </CardContent>
+    </Card>
+  );
 };
 
 const TableSection = ({ level }) => {

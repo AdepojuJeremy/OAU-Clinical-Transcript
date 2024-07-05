@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Student from "./custom/StudentProfileLayout";
-import { Button } from "./ui/button";
-import EditableTable from "./custom/EditableTable";
+import Student from "../components/custom/StudentProfileLayout";
+import { Button } from "../components/ui/button";
+import EditableTable from "../components/custom/EditableTable";
 import axios from "axios";
 
 export default function UploadIndividual() {
