@@ -11,6 +11,7 @@ import {
   TableRow,
 } from "../ui/table";
 import { convertToDigit } from "@/lib/convertToDigit";
+import { transformAcademicSession } from "@/lib/convertAcademicSession";
 import { Button } from "../ui/button";
 import { useSelector } from "react-redux";
 
@@ -52,7 +53,7 @@ const ResultsTable = () => {
                   <div className="border-r font-bold border-primaryGray grid items-center h-full w-[fit-content] ">
                     <span className="mr-5">
                       {" "}
-                      {`${convertToDigit(level)}L 19/20 Session`}
+                      {`${convertToDigit(level)}L ${transformAcademicSession(data.academicSessionAdmitted ?? '2019/2020')} Session`}
                     </span>
                   </div>
                 </div>

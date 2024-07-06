@@ -164,6 +164,8 @@ function SearchBar({ linkText, currPage }) {
       // );
       // console.log(identifier);
       // dispatch(setSelectedStudentData(response.data));
+      dispatch(setSelectedStudentData(identifier));
+      
       navigate(`/${currPage}/${identifier}`);
     } catch (err) {
       console.log(err);

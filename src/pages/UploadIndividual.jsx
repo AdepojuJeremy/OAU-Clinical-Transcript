@@ -43,13 +43,7 @@ export default function UploadIndividual() {
             Input Results
           </h2>
           <EditableTable />
-          <Button
-            className="capitalize self-end"
-            variant="default"
-            onClick={handleUploadResults}
-          >
-            Upload Results
-          </Button>
+         
         </div>
       </Student>
     </>

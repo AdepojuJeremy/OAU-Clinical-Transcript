@@ -5,7 +5,7 @@ import { convertToDigit } from "@/lib/convertToDigit";
 
 export const generateTranscript = (studentData) => {
     const doc = new jsPDF();
-    console.log(studentData)
+  
 
     // Add institution details
     doc.setFontSize(18);
@@ -41,5 +41,5 @@ export const generateTranscript = (studentData) => {
     // Save PDF
     doc.save("transcript.pdf");
 
-    console.log("called")
+   
   };

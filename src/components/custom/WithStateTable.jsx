@@ -5,13 +5,12 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  TableCell,
 } from "../ui/table";
 import { FaPlus } from "react-icons/fa";
 import { Card, CardContent } from "../ui/card";
 import { useSelector } from "react-redux";
 import { transformAcademicSession } from "@/lib/convertAcademicSession";
-import { convertToDigit } from "@/lib/convertToDigit";
-import { Button } from "../ui/button";
 
 const courseTitles = {
   twohundredlevel: ["Anatomy", "Physiology", "Biochemistry"],
@@ -28,9 +27,9 @@ const courseTitles = {
 
 const coursesArray = Object.keys(courseTitles);
 
-const EditableCell = ({ value, onSave, className }) => {
+const EditableCell = ({ onSave, className }) => {
   const [editing, setEditing] = useState(false);
-  const [cellValue, setCellValue] = useState(value);
+  const [cellValue, setCellValue] = useState("");
 
   const handleDoubleClick = () => {
     setEditing(true);
@@ -42,62 +41,50 @@ const EditableCell = ({ value, onSave, className }) => {
   };
 
   const handleChange = (e) => {
-    setCellValue(e.target.value);
+    setCellValue(e.target.innerText);
   };
 
   return (
     <td
-      onClick={handleDoubleClick} // Click event instead of double click
+      onDoubleClick={handleDoubleClick}
       onBlur={handleBlur}
+      contentEditable={editing}
+      suppressContentEditableWarning={true}
+      onInput={handleChange}
       className={`${className} min-w-[100px] h-[25px]`} // Adjust these values as needed
     >
-      {editing ? (
-        <input
-          type="text"
-          value={cellValue}
-          onChange={handleChange}
-          autoFocus
-          onBlur={handleBlur}
-          className="w-[min-content] text-center h-full border-none outline-none px-2"
-        />
-      ) : (
-        value
-      )}
+      {cellValue}
     </td>
   );
 };
 
-const TableSection = ({ courses, onSave }) => {
+const TableSection = ({ levelIndex }) => {
   const { selectedStudentData: data } = useSelector((st) => st.app);
 
-  const handleCellSave = (newValue, rowIndex) => {
-    const updatedCourses = [...courses];
-    updatedCourses[rowIndex].courseScore = newValue;
-    onSave(updatedCourses);
-  };
+  const levelCourses = courseTitles[coursesArray[levelIndex]];
+  const initialRow = Array(levelCourses.length).fill("");
 
   return (
     <Table>
       <TableHeader className="border-primaryGray">
         <TableRow className="bg-placeholder text-black" isHeaderRow={true}>
-          {courses.map((course, index) => (
-            <th
+          {levelCourses.map((course, index) => (
+            <TableHead
               key={index}
               className="capitalize text-black font-bold text-center"
             >
-              {course.courseTitle}
-            </th>
+              {course}
+            </TableHead>
           ))}
         </TableRow>
       </TableHeader>
 
       <TableBody className="border-primaryGray">
         <TableRow key={1}>
-          {courses.map((course, index) => (
+          {initialRow.map((_, index) => (
             <EditableCell
               key={index}
-              value={course.courseScore}
-              onSave={(value) => handleCellSave(value, index)}
+              onSave={(value) => console.log(`Saved value: ${value}`)} // Replace with your onSave logic
               className="border-r border-primaryGray text-black font-bold text-center"
             />
           ))}
@@ -115,8 +102,8 @@ const UploadTable = () => {
 
   const [tableData, setTableData] = useState([
     {
-      level: "twohundredlevel",
-      courses: courseTitles["twohundredlevel"].map((x) => ({
+      level: "twoHundredLevel",
+      courses: courseTitles["twoHundredLevel"].map((x) => ({
         courseTitle: x,
         courseScore: "",
         courseGrade: "",
@@ -143,41 +130,35 @@ const UploadTable = () => {
   };
 
   useEffect(() => {
+    console.log("Table Data Changed:", 1);
+  }, [tableData]);
+  
+  useEffect(() => {
     console.log(tableData);
-  }, [tableData, numberOfLevels]);
+    console.log(numberOfLevels);
+
+  }, [tableData,numberOfLevels]);
 
   const handleLogTableData = () => {
-    // Gather data from the table and log in the required format
-    console.log(tableData);
-  };
-
-  const handleSaveCourseData = (updatedCourses, levelIndex) => {
-    const updatedTableData = [...tableData];
-    updatedTableData[levelIndex].courses = updatedCourses;
-    setTableData(updatedTableData);
+    // Gather data from the table
   };
 
   return (
     <Card className="mb-5">
       <CardContent className="pt-8">
         <div className="flex flex-col gap-5 mb-10">
-          {tableData.map((x, index) => (
+          {[...Array(numberOfLevels)].map((_, index) => (
             <div key={index} className="border-primaryGray border rounded">
               <div className="h-[40px] w-full grid items-center px-2">
                 <div className="border-r font-bold border-primaryGray grid items-center h-full w-[fit-content]">
                   <span className="mr-5">
-                    {`${convertToDigit(x.level)}L ${transformAcademicSession(
+                    {`${index + 2}00L ${transformAcademicSession(
                       data.academicSessionAdmitted
                     )} Session`}
                   </span>
                 </div>
               </div>
-              <TableSection
-                courses={x.courses}
-                onSave={(updatedCourses) =>
-                  handleSaveCourseData(updatedCourses, index)
-                }
-              />
+              <TableSection levelIndex={index} />
             </div>
           ))}
         </div>
@@ -185,24 +166,20 @@ const UploadTable = () => {
         {numberOfLevels < coursesArray.length && (
           <div className="flex justify-center items-center">
             <button
-              onClick={handleAddLevel}
+              onClick={()=> (console.log('object'))}
               type="button"
               className="flex items-center"
             >
-              <FaPlus className="text-xl mr-2" />
-              <span>Add New Year</span>
+              {/* <FaPlus className="text-xl mr-2" /> */}
+              {/* <span>Add New Year</span> */}
             </button>
           </div>
         )}
 
-        <div className="flex justify-center w-full mt-5">
-          <Button
-            className="capitalize self-end"
-            variant="default"
-            onClick={handleLogTableData}
-          >
-            Upload Results
-          </Button>
+        <div className="flex justify-center mt-5">
+          <button onClick={handleLogTableData} className="btn-primary">
+            Log Table Data
+          </button>
         </div>
       </CardContent>
     </Card>

@@ -13,7 +13,6 @@ export default function ResultsPage({ params }) {
 
   const handleGenerateTranscript = () => {
     // Ensure that the resultsTableRef has a current value
-    console.log("Handle generate transcript page.");
     console.log(downloadData)
     generateTranscript(downloadData)
   };

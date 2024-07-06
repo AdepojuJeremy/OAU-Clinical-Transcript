@@ -69,9 +69,9 @@ export default function CardWithForm() {
       // const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/auth/login`; // Use environment variable for secure URL storage
       // const response = await axios.post(url, formData);
 
-      console.log(response.data, "login successful");
-      Cookies.set("token", response.data?.token);
-      dispatch(setCredentials(response.data?.token));
+      // console.log(response?.data, "login successful");
+      // Cookies.set("token", response?.data?.token);
+      // dispatch(setCredentials(response?.data?.token));
       navigate("/upload");
     } catch (error) {
       console.error(error);
